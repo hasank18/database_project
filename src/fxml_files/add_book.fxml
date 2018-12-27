@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddBook_Controller">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <Label text="Enter Book Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField promptText="Book Name">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Enter Book Amount">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField promptText="Book Amount">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Enter Author Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField promptText="Author Name" />
+            <Label text="Enter Book Category">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField promptText="Book Catogary" />
+            <AnchorPane prefHeight="343.0" prefWidth="1018.0">
+               <children>
+                  <Button layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Submit" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" />
+                  <Button layoutX="955.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></VBox>
+   </children>
+</AnchorPane>

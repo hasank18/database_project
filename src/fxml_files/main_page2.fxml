@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane cacheShape="false" centerShape="false" dividerPositions="0.3979933110367893" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Lib_Controller">
+  <items>
+      <VBox fx:id="main_pane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #00001f;">
+         <children>
+            <HBox fx:id="lib_box" onMouseClicked="#handleLibraryAction">
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin>
+               <children>
+                 <ImageView fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/library.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></ImageView>
+                  <Label fx:id="label1" maxWidth="1.7976931348623157E308" text="Library" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Abyssinica SIL" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="bor_box" onMouseClicked="#handleBorrowBookAction">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/book.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></ImageView>
+                  <Label maxWidth="1.7976931348623157E308" text="Borrow a book" textFill="WHITE">
+                     <font>
+                        <Font name="Abyssinica SIL" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="book_box" onMouseClicked="#handleAddBookAction">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/add_book.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></ImageView>
+                  <Label maxWidth="1.7976931348623157E308" prefWidth="163.0" text="Add new book" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="3.0" top="3.0" />
+                     </padding>
+                     <font>
+                        <Font name="Abyssinica SIL" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="emp_box" onMouseClicked="#handleAddEmployeeAction">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/add_employee.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></ImageView>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="180.0" text="Add Employee" textFill="WHITE">
+                     <font>
+                        <Font name="Abyssinica SIL" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" top="16.0" />
+         </padding>
+      </VBox>
+    <AnchorPane fx:id="switch_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+  </items>
+</SplitPane>
