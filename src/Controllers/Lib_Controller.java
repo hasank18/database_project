@@ -1,74 +1,76 @@
 package Controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+
+import javafx.event.ActionEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import sample.Main;
+import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static java.lang.Double.MAX_VALUE;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class Lib_Controller implements Initializable {
     @FXML
-    AnchorPane switch_pane;
+    HBox container;
     @FXML
-    VBox main_pane;
-    @FXML
-    HBox lib_box;
-    @FXML
-    HBox emp_box;
-    @FXML
-    HBox bor_box;
-    @FXML
-    HBox book_box;
-    @FXML
-    AnchorPane test_pane;
-
-
+    ComboBox<String> category;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        FillChoiceBox();
+    }
 
+    @FXML
+    private void FillChoiceBox(){
+        category.getItems().addAll("Category","Date","Amount");
     }
     @FXML
-    public void handleLibraryAction(javafx.event.Event actionEvent)throws Exception{
-        emp_box.setStyle("-fx-background-color: #00001f;");
-        book_box.setStyle("-fx-background-color: #00001f;");
-        bor_box.setStyle("-fx-background-color: #00001f;");
-        lib_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/library.fxml"));
-        switch_pane.getChildren().setAll(pane);
+    private void displayValue(ActionEvent event){
+        if(!container.getChildren().isEmpty()) {
+            container.getChildren().removeAll(container.getChildren());
+        }
+        String choice = category.getValue();
+        if(choice.equals("Category"))
+            ChooseCategory();
+        else if(choice.equals("Date"))
+            ChooseDate();
+        else if(choice.equals("Amount")){
+            ChooseAmount();
+        }
     }
-    @FXML
-    public void handleAddEmployeeAction(javafx.event.Event actionEvent)throws Exception{
-        bor_box.setStyle("-fx-background-color: #00001f;");
-        lib_box.setStyle("-fx-background-color: #00001f;");
-        book_box.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_employee.fxml"));
-        switch_pane.getChildren().setAll(pane);
+
+    private void ChooseAmount() {
+        Label label = new Label("Choose the Date");
+        TextField textField = new TextField();
+        textField.setPromptText("if this field is empty all amounts will be shown with book's name only");
+        textField.setPrefWidth(470);
+        container.getChildren().addAll(label,textField);
+        container.setMargin(label,new Insets(0,8,0,0));
+        container.setMargin(textField,new Insets(0,0,0,8));
     }
-    @FXML
-    public void handleAddBookAction(javafx.event.Event actionEvent)throws Exception{
-        bor_box.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: #00001f;");
-        lib_box.setStyle("-fx-background-color: #00001f;");
-        book_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_book.fxml"));
-        switch_pane.getChildren().setAll(pane);
+
+    private void ChooseDate() {
+        Label label = new Label("Choose the Date");
+        DatePicker datePicker = new DatePicker();
+        container.getChildren().addAll(label,datePicker);
+        container.setMargin(label,new Insets(0,8,0,0));
+        container.setMargin(datePicker,new Insets(0,0,0,8));
     }
-    @FXML
-    public void handleBorrowBookAction(javafx.event.Event actionEvent)throws Exception{
-        book_box.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: #00001f;");
-        lib_box.setStyle("-fx-background-color: #00001f;");
-        bor_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/borrow_book.fxml"));
-        switch_pane.getChildren().setAll(pane);
-        switch_pane.setMaxSize(MAX_VALUE,MAX_VALUE);
+
+    private void ChooseCategory() {
+        Label label = new Label("Choose the Category");
+        ChoiceBox<String> choiceBox = new ChoiceBox<String>();
+        choiceBox.getItems().addAll("Thriller","Romance","Drama","Comedy");
+        container.getChildren().addAll(label,choiceBox);
+        container.setMargin(label,new Insets(0,8,0,0));
+        container.setMargin(choiceBox,new Insets(0,0,0,8));
+
     }
 }
