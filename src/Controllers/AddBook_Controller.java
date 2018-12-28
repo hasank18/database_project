@@ -36,36 +36,39 @@ public class AddBook_Controller implements Initializable {
             addBook();
     }
     private boolean checkInfo() {
+        boolean flag=false;
 
         if(name_field.getText().isEmpty()){
             no_name.setText("Please enter your name");
             no_name.setTextFill(Color.web("red"));
-            return false;
+            flag=false;
         }
         else
             no_name.setText("");
         if(amount_field.getText().isEmpty()){
             no_amount.setText("Please enter your email");
             no_amount.setTextFill(Color.web("red"));
-            return false;
+            flag=false;
         }
         else
             no_amount.setText("");
         if(category_field.getText().isEmpty()){
             no_category.setText("Please enter your phone");
             no_category.setTextFill(Color.web("red"));
-            return false;
+            flag=false;
         }
         else
             no_category.setText("");
         if(author_field.getText().isEmpty()){
             no_author.setText("Please enter date");
             no_author.setTextFill(Color.web("red"));
-            return false;
+            flag=false;
         }
         else
             no_author.setText("");
-        return true;
+        if(name_field.getText().isEmpty()&&author_field.getText().isEmpty()&&category_field.getText().isEmpty()&&amount_field.getText().isEmpty())
+            flag = true;
+        return flag;
     }
     private void addBook(){
         try {
