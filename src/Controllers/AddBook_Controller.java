@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class AddBook_Controller implements Initializable {
+    static int id = 15;
     String server="localhost";
     int port=3306;
     String user="root";
@@ -66,16 +67,20 @@ public class AddBook_Controller implements Initializable {
         }
         else
             no_author.setText("");
-        if(name_field.getText().isEmpty()&&author_field.getText().isEmpty()&&category_field.getText().isEmpty()&&amount_field.getText().isEmpty())
+        if(!name_field.getText().isEmpty()&&!author_field.getText().isEmpty()&&!category_field.getText().isEmpty()&&!amount_field.getText().isEmpty())
             flag = true;
         return flag;
     }
     private void addBook(){
+        int book_id=id,amount=Integer.parseInt(amount_field.getText()),author_id=Integer.parseInt(author_field.getText()),category_id=Integer.parseInt(category_field.getText());
+        String book_name=name_field.getText();
+        id++;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
             Statement stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("call addBook(1000,'hasan',20,1,5)");
+            String test ="call addBook(" + book_id +","+"'"+book_name+"'"+","+amount+","+author_id+","+category_id+")";
+            ResultSet rs=stmt.executeQuery(test);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
