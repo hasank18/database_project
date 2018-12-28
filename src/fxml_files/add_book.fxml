@@ -20,11 +20,12 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextField promptText="Book Name">
+            <TextField fx:id="name_field" promptText="Book Name">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
+            <Label fx:id="no_name" />
             <Label text="Enter Book Amount">
                <font>
                   <Font size="18.0" />
@@ -33,11 +34,12 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <TextField promptText="Book Amount">
+            <TextField fx:id="amount_field" promptText="Book Amount">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </TextField>
+            <Label fx:id="no_amount" />
             <Label text="Enter Author Name">
                <font>
                   <Font size="18.0" />
@@ -46,16 +48,27 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <TextField promptText="Author Name" />
+            <TextField fx:id="author_field" promptText="Author Name">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin></TextField>
+            <Label fx:id="no_author" />
             <Label text="Enter Book Category">
                <font>
                   <Font size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
             </Label>
-            <TextField promptText="Book Catogary" />
+            <TextField fx:id="category_field" promptText="Book Catogary">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin></TextField>
+            <Label fx:id="no_category" />
             <AnchorPane prefHeight="343.0" prefWidth="1018.0">
                <children>
-                  <Button layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Submit" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" />
+                  <Button layoutY="313.0" mnemonicParsing="false" onAction="#handleSumbitEvenet" prefHeight="25.0" prefWidth="165.0" text="Submit" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" />
                   <Button layoutX="955.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>

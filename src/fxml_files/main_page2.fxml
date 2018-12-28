@@ -96,11 +96,33 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
+            <HBox fx:id="add_client" onMouseClicked="#handleAddClientAction">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/add_employee.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></ImageView>
+                  <Label fx:id="label1" maxWidth="1.7976931348623157E308" text="Add Client" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Abyssinica SIL" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" top="16.0" />
          </padding>
       </VBox>
-    <AnchorPane fx:id="switch_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+    <AnchorPane fx:id="switch_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
   </items>
 </SplitPane>

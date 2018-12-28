@@ -8,14 +8,8 @@ import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static java.lang.Double.MAX_VALUE;
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class Lib_Controller implements Initializable {
     @FXML

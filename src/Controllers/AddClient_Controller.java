@@ -1,5 +1,6 @@
 package Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -7,11 +8,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.event.ActionEvent;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class add_employee_controller implements Initializable {
+public class AddClient_Controller implements Initializable {
     @FXML
     ChoiceBox<String> choiceBox;
     @FXML

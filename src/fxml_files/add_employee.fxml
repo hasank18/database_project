@@ -21,10 +21,11 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <TextField promptText="Name Here">
+            <TextField fx:id="name_field" promptText="Name Here">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
+            <Label fx:id="no_name" />
             <Label text="Enter Birthdate">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -32,10 +33,25 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <DatePicker>
+            <DatePicker fx:id="date_field">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></DatePicker>
+            <Label fx:id="no_birthdate" />
+            <Label text="Enter Phone Number">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="phone_field" promptText="example:00/000000">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="no_phone" />
             <Label text="Enter EmailAddress">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -43,10 +59,11 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <TextField promptText="eample@example.com">
+            <TextField fx:id="email_field" promptText="eample@example.com">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
+            <Label fx:id="no_email" />
             <Label text="Choose Gender">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -58,10 +75,11 @@
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin></ChoiceBox>
+            <Label fx:id="no_gender" />
             <AnchorPane prefHeight="315.0" prefWidth="1018.0">
                <children>
                   <Button layoutX="853.0" layoutY="283.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
-                  <Button layoutY="283.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Submit" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" />
+                  <Button layoutY="283.0" mnemonicParsing="false" onAction="#handleSumbitEvenet" prefHeight="25.0" prefWidth="165.0" text="Submit" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" />
                </children></AnchorPane>
          </children></VBox>
    </children>
