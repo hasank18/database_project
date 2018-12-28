@@ -72,14 +72,22 @@ public class AddBook_Controller implements Initializable {
         return flag;
     }
     private void addBook(){
-        int book_id=id,amount=Integer.parseInt(amount_field.getText()),author_id=Integer.parseInt(author_field.getText()),category_id=Integer.parseInt(category_field.getText());
+        int book_id=id,amount=Integer.parseInt(amount_field.getText()),auth_id=-1,cat_id=-1;
         String book_name=name_field.getText();
+        String get_auth_id="select Author_id from Author where AuthorName='"+author_field.getText()+"'";
+        String get_cat_id="select Category_id from Category where CategoryName='"+category_field.getText()+"'";
         id++;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
             Statement stmt=con.createStatement();
-            String test ="call addBook(" + book_id +","+"'"+book_name+"'"+","+amount+","+author_id+","+category_id+")";
+            ResultSet rs2 = stmt.executeQuery(get_auth_id);
+            rs2.next();
+            auth_id=rs2.getInt(1);
+            ResultSet rs3 = stmt.executeQuery(get_cat_id);
+            rs3.next();
+            cat_id=rs3.getInt(1);
+            String test ="call addBook(" + book_id +","+"'"+book_name+"'"+","+amount+","+auth_id+","+cat_id+")";
             ResultSet rs=stmt.executeQuery(test);
         } catch (Exception e) {
             // TODO Auto-generated catch block
