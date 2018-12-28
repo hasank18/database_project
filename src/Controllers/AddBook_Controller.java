@@ -8,9 +8,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class AddBook_Controller implements Initializable {
+    String server="localhost";
+    int port=3306;
+    String user="root";
+    String password="";
+    String database="mydb";
+    String jdbcurl;
+    Connection con=null;
     @FXML
     Label no_name,no_amount,no_category,no_author;
     @FXML
@@ -22,6 +33,7 @@ public class AddBook_Controller implements Initializable {
     @FXML
     private void handleSumbitEvenet(ActionEvent event){
         checkInfo();
+        addBook();
     }
     private void checkInfo() {
 
@@ -49,6 +61,17 @@ public class AddBook_Controller implements Initializable {
         }
         else
             no_author.setText("");
+    }
+    private void addBook(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("call addBook(1000,'hasan',20,1,5)");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
