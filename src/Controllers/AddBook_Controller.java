@@ -15,7 +15,6 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class AddBook_Controller implements Initializable {
-    static int id = 15;
     String server="localhost";
     int port=3306;
     String user="root";
@@ -72,11 +71,10 @@ public class AddBook_Controller implements Initializable {
         return flag;
     }
     private void addBook(){
-        int book_id=id,amount=Integer.parseInt(amount_field.getText()),auth_id=-1,cat_id=-1;
+        int amount=Integer.parseInt(amount_field.getText()),auth_id=-1,cat_id=-1;
         String book_name=name_field.getText();
         String get_auth_id="select Author_id from Author where AuthorName='"+author_field.getText()+"'";
         String get_cat_id="select Category_id from Category where CategoryName='"+category_field.getText()+"'";
-        id++;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
@@ -87,7 +85,7 @@ public class AddBook_Controller implements Initializable {
             ResultSet rs3 = stmt.executeQuery(get_cat_id);
             rs3.next();
             cat_id=rs3.getInt(1);
-            String test ="call addBook(" + book_id +","+"'"+book_name+"'"+","+amount+","+auth_id+","+cat_id+")";
+            String test ="call addBook('"+book_name+"'"+","+amount+","+auth_id+","+cat_id+")";
             ResultSet rs=stmt.executeQuery(test);
         } catch (Exception e) {
             // TODO Auto-generated catch block

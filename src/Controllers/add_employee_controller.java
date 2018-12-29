@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class add_employee_controller implements Initializable {
-    static int id=10;
     String server="localhost";
     int port=3306;
     String user="root";
@@ -47,20 +46,18 @@ public class add_employee_controller implements Initializable {
     }
 
     private void addClient() {
-        int Cid=id;
         String cname=name_field.getText();
         String gender=choiceBox.getValue();
         String address=email_field.getText();
         String phone=phone_field.getText();
         LocalDate date=date_field.getValue();
         String birthdate = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
-        id++;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
             Statement stmt=con.createStatement();
-            String test ="call addemployee(" + Cid +","+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"','600$')";
+            String test ="call addemployee("+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"','600$')";
             ResultSet rs=stmt.executeQuery(test);
         } catch (Exception e) {
             // TODO Auto-generated catch block
