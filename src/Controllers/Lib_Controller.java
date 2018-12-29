@@ -150,5 +150,6 @@ public class Lib_Controller implements Initializable {
         }
 
         table.getItems().add(new Books(id,name,amount,auth,cat));
+        //added nothing
     }
 }
