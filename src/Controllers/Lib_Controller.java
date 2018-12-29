@@ -1,18 +1,26 @@
 package Controllers;
 
+import DB.Books;
+import javafx.beans.property.ReadOnlyListWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.LongStream;
 
 public class Lib_Controller implements Initializable {
     String server="localhost";
@@ -23,7 +31,7 @@ public class Lib_Controller implements Initializable {
     String jdbcurl;
     Connection con=null;
     @FXML
-    TableView<String> table;
+    TableView<Books> table;
     @FXML
     TextField book_name_field;
     @FXML
@@ -83,6 +91,39 @@ public class Lib_Controller implements Initializable {
     }
     @FXML
     private void handleSearchEvent(ActionEvent event){
+        TableColumn<Books,String> col1= new TableColumn<>("ID");
+        TableColumn<Books,String> col2= new TableColumn<>("Name");
+        TableColumn<Books,String> col3= new TableColumn<>("Amount");
+        TableColumn<Books,String> col4= new TableColumn<>("Author");
+        TableColumn<Books,String> col5= new TableColumn<>("Category");
+        String auth = "";
+        String cat = "";
+        String id="";
+        String name="";
+        String amount="";
+        col1.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getId());
+        });
+        col2.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getName());
+        });
+        col3.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getAmout());
+        });
+        col4.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getAuth());
+        });
+        col5.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getCat());
+        });
+        table.getColumns().removeAll(table.getColumns());
+        table.getColumns().addAll(col1,col2,col3,col4,col5);
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
@@ -90,26 +131,24 @@ public class Lib_Controller implements Initializable {
             String test = "select *from Books where BookName='"+book_name_field.getText()+"'";
             ResultSet rs2 = stmt.executeQuery(test);
             rs2.next();
-            System.out.println(rs2.getFetchSize());
-            System.out.println(rs2.getInt(1));
-            table.getColumns().removeAll(table.getColumns());
-            TableColumn<String,String> col1= new TableColumn<String, String>("ID");
-            col1.setCellValueFactory(data -> {
-                String Value = data.getValue();
-                return new ReadOnlyStringWrapper(Value);
-            });
-            table.getColumns().add(col1);
-            String string = ""+rs2.getInt(1);
-            table.getItems().addAll(string,string,string,"hasan");
-
-
-
+            id = ""+rs2.getInt(1);
+            name = rs2.getString(2);
+            amount = ""+rs2.getInt(3);
+            int auth_id = rs2.getInt(4);
+            int cat_id = rs2.getInt(5);
+            String get_auth= "select AuthorName from Author where Author_id="+auth_id;
+            String get_cat = "select CategoryName from Category where Category_id="+cat_id;
+            rs2 = stmt.executeQuery(get_auth);
+            rs2.next();
+            auth = rs2.getString(1);
+            rs2 = stmt.executeQuery(get_cat);
+            rs2.next();
+            cat = rs2.getString(1);
         }catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-
-
+        table.getItems().add(new Books(id,name,amount,auth,cat));
     }
 }
