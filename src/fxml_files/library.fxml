@@ -17,8 +17,8 @@
          <children>
             <AnchorPane>
                <children>
-                  <TextField layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="927.0" promptText="Enter the Book Name" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="934.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="Search" AnchorPane.leftAnchor="934.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextField fx:id="book_name_field" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="927.0" promptText="Enter the Book Name" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="934.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSearchEvent" prefHeight="26.0" prefWidth="166.0" text="Search" AnchorPane.leftAnchor="934.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="8.0" />
@@ -45,14 +45,11 @@
                      </HBox.margin></Button>
                </children>
             </HBox>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
               </columns>
-               <VBox.margin>
-                  <Insets top="8.0" />
-               </VBox.margin>
             </TableView>
          </children>
       </VBox>
