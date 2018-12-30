@@ -18,7 +18,7 @@
             </effect></FontAwesomeIconView>
         <Icons525View fill="#0f9a0f" glyphName="LOCK" layoutX="56.0" layoutY="255.0" size="25" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
         <Icons525View fill="#0f9a0f" glyphName="USER" layoutX="57.0" layoutY="172.0" size="25" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="24.0" />
-        <Button id="btnLogin" layoutX="154.0" layoutY="319.0" mnemonicParsing="false" onAction="#eventHandler" text="LOGIN" textAlignment="CENTER" textFill="#617550" textOverrun="LEADING_WORD_ELLIPSIS">
+        <Button id="btnLogin" fx:id="btnlogin" layoutX="154.0" layoutY="319.0" mnemonicParsing="false" onAction="#eventHandler" text="LOGIN" textAlignment="CENTER" textFill="#617550" textOverrun="LEADING_WORD_ELLIPSIS">
             <font>
                 <Font name="525icons" size="17.0" />
             </font>
@@ -28,7 +28,13 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <PasswordField layoutX="97.0" layoutY="229.0" text="PassWord" />
+        <PasswordField fx:id="pass" layoutX="97.0" layoutY="229.0" text="PassWord" />
         <TextField layoutX="97.0" layoutY="149.0" text="UserName" />
+      <Label text="Label" />
+      <Label layoutX="144.0" layoutY="361.0" prefHeight="45.0" prefWidth="112.0" text="welcome" textFill="#ee0303">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

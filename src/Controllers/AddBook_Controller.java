@@ -17,8 +17,8 @@ import java.util.ResourceBundle;
 public class AddBook_Controller implements Initializable {
     String server="localhost";
     int port=3306;
-    String user="root";
-    String password="";
+    String user="hanin";
+    String password="h@n!nabbas123";
     String database="mydb";
     String jdbcurl;
     Connection con=null;
@@ -77,7 +77,7 @@ public class AddBook_Controller implements Initializable {
         String get_cat_id="select Category_id from Category where CategoryName='"+category_field.getText()+"'";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
             ResultSet rs2 = stmt.executeQuery(get_auth_id);
             rs2.next();

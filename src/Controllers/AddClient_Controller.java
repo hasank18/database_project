@@ -20,8 +20,8 @@ import java.util.ResourceBundle;
 public class AddClient_Controller implements Initializable {
     String server="localhost";
     int port=3306;
-    String user="root";
-    String password="";
+    String user="hanin";
+    String password="h@n!nabbas123";
     String database="mydb";
     String jdbcurl;
     Connection con=null;
@@ -56,7 +56,7 @@ public class AddClient_Controller implements Initializable {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
             String test ="call addclient("+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"')";
             ResultSet rs=stmt.executeQuery(test);
