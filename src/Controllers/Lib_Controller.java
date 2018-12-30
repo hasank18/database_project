@@ -1,35 +1,35 @@
 package Controllers;
 
 import DB.Books;
-import javafx.beans.property.ReadOnlyListWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.LongStream;
 
 public class Lib_Controller implements Initializable {
-    String server="localhost";
-    int port=3306;
-    String user="root";
-    String password="";
-    String database="mydb";
-    String jdbcurl;
-    Connection con=null;
+    private String server="localhost";
+    private int port=3306;
+    private String user="root";
+    private String password="";
+    private String database="mydb";
+    private String jdbcurl;
+    private Connection con=null;
+    private Label label = new Label();
+    private TextField textField = new TextField();
+    private DatePicker datePicker = new DatePicker();
+    private ChoiceBox<String> choiceBox = new ChoiceBox<String>();
     @FXML
     TableView<Books> table;
     @FXML
@@ -63,8 +63,7 @@ public class Lib_Controller implements Initializable {
     }
 
     private void ChooseAmount() {
-        Label label = new Label("Choose the Date");
-        TextField textField = new TextField();
+        label.setText("Choose amount");
         textField.setPromptText("if this field is empty all amounts will be shown with book's name only");
         textField.setPrefWidth(470);
         container.getChildren().addAll(label,textField);
@@ -73,17 +72,15 @@ public class Lib_Controller implements Initializable {
     }
 
     private void ChooseDate() {
-        Label label = new Label("Choose the Date");
-        DatePicker datePicker = new DatePicker();
+        label.setText("Choose date");
         container.getChildren().addAll(label,datePicker);
         container.setMargin(label,new Insets(0,8,0,0));
         container.setMargin(datePicker,new Insets(0,0,0,8));
     }
 
     private void ChooseCategory() {
-        Label label = new Label("Choose the Category");
-        ChoiceBox<String> choiceBox = new ChoiceBox<String>();
-        choiceBox.getItems().addAll("Thriller","Romance","Drama","Comedy");
+        label.setText("Choose Category");
+        choiceBox.getItems().addAll("Action","Comedy","Drama","Education","Horror","Romance","Thriller");
         container.getChildren().addAll(label,choiceBox);
         container.setMargin(label,new Insets(0,8,0,0));
         container.setMargin(choiceBox,new Insets(0,0,0,8));
@@ -152,4 +149,163 @@ public class Lib_Controller implements Initializable {
         table.getItems().add(new Books(id,name,amount,auth,cat));
         //added nothing
     }
+    @FXML
+    private void handleFilterEvent(ActionEvent event){
+        if(category.getValue()==null){
+            Label label= new Label("please choose an option");
+            label.setTextFill(Color.web("red"));
+            container.getChildren().removeAll(container.getChildren());
+            container.getChildren().add(label);
+        }
+        else if(category.getValue().equals("Date"))
+            search_date();
+        else if(category.getValue().equals("Amount")){
+            search_amount();
+        }
+        else{
+            search_category();
+        }
+    }
+
+    private void search_amount() {
+        TableColumn<Books,String> col1= new TableColumn<>("ID");
+        TableColumn<Books,String> col2= new TableColumn<>("Name");
+        TableColumn<Books,String> col3= new TableColumn<>("Amount");
+        TableColumn<Books,String> col4= new TableColumn<>("Author");
+        TableColumn<Books,String> col5= new TableColumn<>("Category");
+        ArrayList<String> auth = new ArrayList<>();
+        ArrayList<String> cat = new ArrayList<>();
+        ArrayList<String> id= new ArrayList<>();
+        ArrayList<String> name=new ArrayList<>();
+        ArrayList<String> amount=new ArrayList<>();
+        col1.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getId());
+        });
+        col2.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getName());
+        });
+        col3.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getAmout());
+        });
+        col4.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getAuth());
+        });
+        col5.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getCat());
+        });
+        table.getColumns().removeAll(table.getColumns());
+        table.getColumns().addAll(col1,col2,col3,col4,col5);
+        String string = ""+textField.getText();
+        int amount2 = Integer.parseInt(string);
+        String get_data = "select *from Books where Amount="+amount2;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            Statement stmt=con.createStatement();
+            ResultSet rs2 = stmt.executeQuery(get_data);
+            ArrayList<Integer> auth_id = new ArrayList<>();
+            ArrayList<Integer> cat_id = new ArrayList<>();
+            while (rs2.next()) {
+                id.add("" + rs2.getInt(1));
+                name.add(rs2.getString(2));
+                amount.add("" + rs2.getInt(3));
+                auth_id.add(rs2.getInt(4));
+                cat_id.add(rs2.getInt(5));
+            }
+            ResultSet rs3;
+            for(int i =0; i < auth_id.size();i++) {
+                String get_auth = "select AuthorName from Author where Author_id=" + auth_id.get(i);
+                String get_cat = "select CategoryName from Category where Category_id=" + cat_id.get(i);
+                rs3 = stmt.executeQuery(get_auth);
+                rs3.next();
+                auth.add(rs3.getString(1));
+                rs3 = stmt.executeQuery(get_cat);
+                rs3.next();
+                cat.add(rs3.getString(1));
+                table.getItems().add(new Books(id.get(i), name.get(i), amount.get(i), auth.get(i), cat.get(i)));
+            }
+        }catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void search_date() {
+    }
+
+    private void search_category() {
+        TableColumn<Books,String> col1= new TableColumn<>("ID");
+        TableColumn<Books,String> col2= new TableColumn<>("Name");
+        TableColumn<Books,String> col3= new TableColumn<>("Amount");
+        TableColumn<Books,String> col4= new TableColumn<>("Author");
+        TableColumn<Books,String> col5= new TableColumn<>("Category");
+        ArrayList<String> auth = new ArrayList<>();
+        ArrayList<String> cat = new ArrayList<>();
+        ArrayList<String> id= new ArrayList<>();
+        ArrayList<String> name=new ArrayList<>();
+        ArrayList<String> amount=new ArrayList<>();
+        ArrayList<Integer> auth_id = new ArrayList<>();
+        ArrayList<Integer> cat_id = new ArrayList<>();
+        col1.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getId());
+        });
+        col2.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getName());
+        });
+        col3.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getAmout());
+        });
+        col4.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getAuth());
+        });
+        col5.setCellValueFactory(data -> {
+            Books value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getCat());
+        });
+        table.getColumns().removeAll(table.getColumns());
+        table.getItems().removeAll(table.getItems());
+        table.getColumns().addAll(col1,col2,col3,col4,col5);
+        String get_cat_id="select Category_id from Category where CategoryName='"+choiceBox.getValue()+"'";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            Statement stmt=con.createStatement();
+            ResultSet rs = stmt.executeQuery(get_cat_id);
+            rs.next();
+            String get_data = "select * from Books where Category_Category_id1="+rs.getInt(1);
+            ResultSet rs2 = stmt.executeQuery(get_data);
+            while (rs2.next()) {
+                id.add("" + rs2.getInt(1));
+                name.add(rs2.getString(2));
+                amount.add("" + rs2.getInt(3));
+                auth_id.add(rs2.getInt(4));
+                cat_id.add(rs2.getInt(5));
+            }
+            ResultSet rs3;
+            for(int i =0; i < auth_id.size();i++) {
+                String get_auth = "select AuthorName from Author where Author_id=" + auth_id.get(i);
+                String get_cat = "select CategoryName from Category where Category_id=" + cat_id.get(i);
+                rs3 = stmt.executeQuery(get_auth);
+                rs3.next();
+                auth.add(rs3.getString(1));
+                rs3 = stmt.executeQuery(get_cat);
+                rs3.next();
+                cat.add(rs3.getString(1));
+                table.getItems().add(new Books(id.get(i), name.get(i), amount.get(i), auth.get(i), cat.get(i)));
+            }
+        }catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }
