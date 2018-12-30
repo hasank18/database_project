@@ -2,10 +2,7 @@ package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import java.net.URL;
@@ -27,9 +24,11 @@ public class add_employee_controller implements Initializable {
     @FXML
     ChoiceBox<String> choiceBox;
     @FXML
-    Label no_name,no_birthdate,no_phone,no_email,no_gender;
+    Label no_name,no_birthdate,no_phone,no_email,no_gender,no_user,no_pass;
     @FXML
-    TextField name_field,email_field,phone_field;
+    TextField name_field,email_field,phone_field,user_field;
+    @FXML
+    PasswordField pass_field;
     @FXML
     DatePicker date_field;
     @Override
@@ -41,23 +40,25 @@ public class add_employee_controller implements Initializable {
     @FXML
     private void handleSumbitEvenet(ActionEvent event){
         if(checkInfo())
-            addClient();
+            addEmployee();
 
     }
 
-    private void addClient() {
+    private void addEmployee() {
+        String username= user_field.getText();
         String cname=name_field.getText();
         String gender=choiceBox.getValue();
         String address=email_field.getText();
         String phone=phone_field.getText();
         LocalDate date=date_field.getValue();
         String birthdate = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
+        String pass = pass_field.getText();
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
             Statement stmt=con.createStatement();
-            String test ="call addemployee("+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"','600$')";
+            String test ="call addemployee("+"'"+username+"',"+"'"+pass+"',"+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"','600$')";
             ResultSet rs=stmt.executeQuery(test);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -70,6 +71,20 @@ public class add_employee_controller implements Initializable {
     private boolean checkInfo() {
         boolean flag=false;
 
+        if(user_field.getText().isEmpty()){
+            no_user.setText("Please enter your name");
+            no_user.setTextFill(Color.web("red"));
+            flag=false;
+        }
+        else
+            no_user.setText("");
+        if(pass_field.getText().isEmpty()){
+            no_pass.setText("Please enter your name");
+            no_pass.setTextFill(Color.web("red"));
+            flag=false;
+        }
+        else
+            no_pass.setText("");
         if(name_field.getText().isEmpty()){
             no_name.setText("Please enter your name");
             no_name.setTextFill(Color.web("red"));
@@ -105,7 +120,7 @@ public class add_employee_controller implements Initializable {
         }
         else
             no_gender.setText("");
-        if(choiceBox.getValue()!=null&&date_field.getValue()!=null&&!phone_field.getText().isEmpty()&&!email_field.getText().isEmpty()&&!name_field.getText().isEmpty())
+        if(!user_field.getText().isEmpty()&&!pass_field.getText().isEmpty()&&choiceBox.getValue()!=null&&date_field.getValue()!=null&&!phone_field.getText().isEmpty()&&!email_field.getText().isEmpty()&&!name_field.getText().isEmpty())
             flag = true;
         return flag;
     }

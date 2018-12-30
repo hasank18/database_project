@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -14,9 +15,23 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
          <children>
-            <Label text="Enter Full Name">
+            <Label text="Enter User Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
                <VBox.margin>
                   <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="user_field">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="no_user" />
+            <Label text="Enter Full Name">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="18.0" />
@@ -75,6 +90,20 @@
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin></ChoiceBox>
+            <Label text="Enetr Password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="pass_field">
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+            </PasswordField>
+            <Label fx:id="no_pass" />
             <Label fx:id="no_gender" />
             <AnchorPane prefHeight="315.0" prefWidth="1018.0">
                <children>

@@ -61,6 +61,7 @@ public class login_Controller implements Initializable {
             e.printStackTrace();
 
         }
+        System.out.println(UserName);
         return UserName;
     }
 
@@ -79,6 +80,7 @@ public class login_Controller implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(Password);
         return Password;
     }
 

@@ -23,10 +23,11 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></Label>
-            <TextField promptText="Client ID">
+            <TextField fx:id="cid_field" promptText="Client ID">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
+            <Label fx:id="no_cid" />
             <Label text="Enter Book ID">
                <font>
                   <Font size="18.0" />
@@ -34,10 +35,11 @@
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></Label>
-            <TextField promptText="Book ID">
+            <TextField fx:id="bid_field" promptText="Book ID">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
+            <Label fx:id="no_bid" />
             <Label text="Enter The Date">
                <font>
                   <Font size="18.0" />
@@ -47,7 +49,7 @@
                </VBox.margin></Label>
             <GridPane hgap="100.0" maxWidth="1.7976931348623157E308" vgap="10.0">
                <children>
-                  <DatePicker GridPane.columnIndex="0" GridPane.rowIndex="1">
+                  <DatePicker fx:id="sdate" GridPane.columnIndex="0" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </GridPane.margin></DatePicker>
@@ -62,7 +64,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="edate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
                   <ColumnConstraints />
@@ -73,10 +75,11 @@
                   <RowConstraints />
                </rowConstraints>
             </GridPane>
-            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="1016.0">
+            <Label fx:id="no_date" />
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="218.0" prefWidth="1018.0">
                <children>
-                  <Button layoutY="172.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Submit" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" />
                   <Button layoutX="538.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Button layoutX="14.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleSubmitEvent" prefHeight="25.0" prefWidth="165.0" text="Submit" />
                </children>
             </AnchorPane>
          </children>
