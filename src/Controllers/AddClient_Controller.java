@@ -28,9 +28,9 @@ public class AddClient_Controller implements Initializable {
     @FXML
     ChoiceBox<String> choiceBox;
     @FXML
-    Label no_name,no_birthdate,no_phone,no_email,no_gender;
+    Label no_name,no_birthdate,no_phone,no_address,no_gender;
     @FXML
-    TextField name_field,email_field,phone_field;
+    TextField name_field,Address_field,phone_field;
     @FXML
     DatePicker date_field;
     @Override
@@ -49,14 +49,14 @@ public class AddClient_Controller implements Initializable {
     private void addClient() {
         String cname=name_field.getText();
         String gender=choiceBox.getValue();
-        String address=email_field.getText();
+        String address=Address_field.getText();
         String phone=phone_field.getText();
         LocalDate date=date_field.getValue();
         String birthdate = date.getYear()+"-"+date.getMonthValue()+"-"+date.getDayOfMonth();
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","h@n!nabbas123" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
             String test ="call addclient("+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"')";
             ResultSet rs=stmt.executeQuery(test);
@@ -78,13 +78,13 @@ public class AddClient_Controller implements Initializable {
         }
         else
             no_name.setText("");
-        if(email_field.getText().isEmpty()){
-            no_email.setText("Please enter your email");
-            no_email.setTextFill(Color.web("red"));
+        if(Address_field.getText().isEmpty()){
+            no_address.setText("Please enter your Address");
+            no_address.setTextFill(Color.web("red"));
             flag=false;
         }
         else
-            no_email.setText("");
+            no_address.setText("");
         if(phone_field.getText().isEmpty()){
             no_phone.setText("Please enter your phone");
             no_phone.setTextFill(Color.web("red"));
@@ -106,7 +106,7 @@ public class AddClient_Controller implements Initializable {
         }
         else
             no_gender.setText("");
-        if(choiceBox.getValue()!=null&&date_field.getValue()!=null&&!phone_field.getText().isEmpty()&&!email_field.getText().isEmpty()&&!name_field.getText().isEmpty())
+        if(choiceBox.getValue()!=null&&date_field.getValue()!=null&&!phone_field.getText().isEmpty()&&!Address_field.getText().isEmpty()&&!name_field.getText().isEmpty())
             flag = true;
         return flag;
     }

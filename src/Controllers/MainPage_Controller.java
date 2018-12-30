@@ -9,6 +9,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,9 +32,9 @@ public class MainPage_Controller implements Initializable {
     HBox add_client;
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
     @FXML
     public void handleLibraryAction(javafx.event.Event actionEvent)throws Exception{
@@ -41,6 +43,8 @@ public class MainPage_Controller implements Initializable {
         bor_box.setStyle("-fx-background-color: #00001f;");
         add_client.setStyle("-fx-background-color: #00001f;");
         lib_box.setStyle("-fx-background-color: green;");
+        Stage stage = (Stage) switch_pane.getScene().getWindow();
+        stage.setFullScreen(true);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/library.fxml"));
         switch_pane.getChildren().setAll(pane);
     }

@@ -21,8 +21,8 @@ import java.util.ResourceBundle;
 public class Lib_Controller implements Initializable {
     private String server="localhost";
     private int port=3306;
-    private String user="root";
-    private String password="";
+    private String user="hanin";
+    private String password="h@n!nabbas123";
     private String database="mydb";
     private String jdbcurl;
     private Connection con=null;
@@ -123,7 +123,7 @@ public class Lib_Controller implements Initializable {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
             String test = "select *from Books where BookName='"+book_name_field.getText()+"'";
             ResultSet rs2 = stmt.executeQuery(test);

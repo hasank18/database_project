@@ -44,7 +44,7 @@ public class BorrowBook_Controller implements Initializable {
         String endate=""+edate.getValue().getYear()+"-"+edate.getValue().getMonthValue()+"-"+edate.getValue().getDayOfMonth();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "" + "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
             Statement stmt = con.createStatement();
             String addBorrow="call addBorrow('"+stdate+"','"+endate+"',"+cid+","+bid+")";
             System.out.println(addBorrow);

@@ -60,7 +60,7 @@ public class login_Controller implements Initializable {
         String UserName ="";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             pst = con.prepareStatement("select UserName from Employee where UserName = ?");
             pst.setString(1, name.getText());
             rs = pst.executeQuery();
@@ -80,7 +80,7 @@ public class login_Controller implements Initializable {
         String Password ="";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             pst = con.prepareStatement("select Password from Employee where Password = ?");
             pst.setString(1, pass.getText());
             rs = pst.executeQuery();

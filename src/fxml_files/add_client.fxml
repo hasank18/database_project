@@ -46,24 +46,24 @@
                         <Insets bottom="5.0" top="5.0" />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="phone_field" promptText="example:00/000000">
+                <TextField fx:id="phone_field" promptText="example:00-000000">
                     <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                     </VBox.margin>
                 </TextField>
                 <Label fx:id="no_phone" />
-                <Label text="Enter EmailAddress">
+                <Label text="Enter Address">
                     <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                     </VBox.margin>
                     <font>
                         <Font size="18.0" />
                     </font></Label>
-                <TextField fx:id="email_field" promptText="eample@example.com">
+                <TextField fx:id="Address_field">
                     <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                     </VBox.margin></TextField>
-                <Label fx:id="no_email" />
+                <Label fx:id="no_address" />
                 <Label text="Choose Gender">
                     <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
