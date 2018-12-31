@@ -44,7 +44,6 @@ public class MainPage_Controller implements Initializable {
         add_client.setStyle("-fx-background-color: #00001f;");
         lib_box.setStyle("-fx-background-color: green;");
         Stage stage = (Stage) switch_pane.getScene().getWindow();
-        stage.setFullScreen(true);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/library.fxml"));
         switch_pane.getChildren().setAll(pane);
     }
@@ -85,7 +84,7 @@ public class MainPage_Controller implements Initializable {
         lib_box.setStyle("-fx-background-color: #00001f;");
         bor_box.setStyle("-fx-background-color: #00001f;");
         add_client.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_client.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/manage_clients.fxml"));
         switch_pane.getChildren().setAll(pane);
     }
 
