@@ -64,7 +64,7 @@
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></ImageView>
-                  <Label maxWidth="1.7976931348623157E308" prefWidth="163.0" text="Add new book" textFill="WHITE">
+                  <Label maxWidth="1.7976931348623157E308" prefWidth="163.0" text="Manage Books" textFill="WHITE">
                      <padding>
                         <Insets bottom="3.0" top="3.0" />
                      </padding>
@@ -86,7 +86,7 @@
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></ImageView>
-                  <Label maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="180.0" text="Add Employee" textFill="WHITE">
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="180.0" text="Manage Employee" textFill="WHITE">
                      <font>
                         <Font name="Abyssinica SIL" size="24.0" />
                      </font>
@@ -108,7 +108,7 @@
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></ImageView>
-                  <Label fx:id="label1" maxWidth="1.7976931348623157E308" text="Add Client" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="label1" maxWidth="1.7976931348623157E308" text="Manage Clients" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Abyssinica SIL" size="24.0" />
                      </font>

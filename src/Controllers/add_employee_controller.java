@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import sun.security.util.Password;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -55,6 +52,7 @@ public class add_employee_controller implements Initializable {
         String phone = phone_field.getText();
         LocalDate date = date_field.getValue();
         String birthdate = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth();
+        no_UserName.setText("");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -62,8 +60,12 @@ public class add_employee_controller implements Initializable {
             Statement stmt = con.createStatement();
             String test = "call addemployee("+"'"+UserName+"',"+"'"+Password+"',"+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"','600$')";
             ResultSet rs = stmt.executeQuery(test);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+        } catch (java.sql.SQLIntegrityConstraintViolationException e) {
+            no_UserName.setText("User name already taken");
+            no_UserName.setTextFill(Color.web("red"));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -76,7 +78,7 @@ public class add_employee_controller implements Initializable {
             no_UserName.setTextFill(Color.web("red"));
             flag = false;
         }
-            if (name_field.getText().isEmpty()) {
+            if (Password_field.getText().isEmpty()) {
                 no_Password.setText("Please enter your Password");
                 no_Password.setTextFill(Color.web("red"));
                 flag = false;
@@ -112,9 +114,7 @@ public class add_employee_controller implements Initializable {
                 } else
                     no_gender.setText("");
                 if (choiceBox.getValue() != null && date_field.getValue() != null && !phone_field.getText().isEmpty() && !Address_field.getText().isEmpty() && !name_field.getText().isEmpty() && !UserName_field.getText().isEmpty() && !Password_field.getText().isEmpty())
-                    ;
-
-                flag = true;
+                    flag = true;
                 return flag;
             }
 

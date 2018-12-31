@@ -54,7 +54,7 @@ public class MainPage_Controller implements Initializable {
         book_box.setStyle("-fx-background-color: #00001f;");
         add_client.setStyle("-fx-background-color: #00001f;");
         emp_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_employee.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/manage_employee.fxml"));
         switch_pane.getChildren().setAll(pane);
     }
     @FXML

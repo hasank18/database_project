@@ -1,8 +1,6 @@
 package Controllers;
 
-import DB.Books;
-import DB.Client;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
+import DB.Employee;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -23,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class man_client_controller implements Initializable {
+public class man_employee_controller implements Initializable {
     String server="localhost";
     int port=3306;
     String user="hanin";
@@ -34,57 +31,65 @@ public class man_client_controller implements Initializable {
     @FXML
     AnchorPane container;
     @FXML
-    TableView<Client> table;
+    TableView<Employee> table;
     @FXML
-    TableColumn<Client,String> cid_col,name_col,date_col,gender_col,address_col,number_col;
+    TableColumn<Employee,String> username_col,name_col,date_col,gender_col,address_col,number_col,salary_col,pass_col;
     @FXML
     Button update;
     @FXML
     TextField search_field;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        int cid;
-        String cname,birthdate,gender,address,phonenum;
-        cid_col.setCellValueFactory(data -> {
-            Client value = data.getValue();
-            String string = ""+value.getCid();
+        String username,pass,name,birthdate,gender,address,phonenum;
+        username_col.setCellValueFactory(data -> {
+            Employee value = data.getValue();
+            String string = value.getUserName();
+            return new ReadOnlyStringWrapper(string);
+        });
+        pass_col.setCellValueFactory(data -> {
+            Employee value = data.getValue();
+            String string = value.getPassword();
             return new ReadOnlyStringWrapper(string);
         });
         name_col.setCellValueFactory(data -> {
-            Client value = data.getValue();
-            return new ReadOnlyStringWrapper(value.getCname());
+            Employee value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getName());
         });
         date_col.setCellValueFactory(data -> {
-            Client value = data.getValue();
+            Employee value = data.getValue();
             return new ReadOnlyStringWrapper(value.getBirthdate());
         });
         gender_col.setCellValueFactory(data -> {
-            Client value = data.getValue();
-            return new ReadOnlyStringWrapper(value.getGander());
+            Employee value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getGender());
         });
         address_col.setCellValueFactory(data -> {
-            Client value = data.getValue();
+            Employee value = data.getValue();
             return new ReadOnlyStringWrapper(value.getAddress());
         });
         number_col.setCellValueFactory(data -> {
-            Client value = data.getValue();
-            return new ReadOnlyStringWrapper(value.getPhonenum());
+            Employee value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getPhoneNum());
+        });
+        salary_col.setCellValueFactory(data -> {
+            Employee value = data.getValue();
+            return new ReadOnlyStringWrapper(value.getSalary());
         });
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
-            String get_data = "select *from Client";
+            String get_data = "select *from Employee";
             ResultSet rs = stmt.executeQuery(get_data);
             while(rs.next()){
-                cid = rs.getInt(1);
-                cname = rs.getString(2);
-                birthdate = rs.getString(3);
-                gender = rs.getString(4);
-                address = rs.getString(5);
-                phonenum = rs.getString(6);
-                table.getItems().add(new Client(cid,cname,birthdate,gender,address,phonenum));
+                username = rs.getString(1);
+                pass = rs.getString(2);
+                name = rs.getString(3);
+                birthdate = rs.getString(4);
+                gender = rs.getString(5);
+                address = rs.getString(6);
+                phonenum = rs.getString(7);
+                table.getItems().add(new Employee(username,pass,name,birthdate,gender,address,phonenum));
             }
 
         }catch (Exception e){
@@ -92,14 +97,16 @@ public class man_client_controller implements Initializable {
         }
     }
     @FXML
-    private void addClient(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_client.fxml"));
+    private void addEmployee(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_employee.fxml"));
         container.getChildren().setAll(pane);
     }
 
     @FXML
-    private void editClientInfo(ActionEvent event){
+    private void editEmployeeInfo(ActionEvent event){
         table.setEditable(true);
+        salary_col.setCellFactory(TextFieldTableCell.forTableColumn());
+        pass_col.setCellFactory(TextFieldTableCell.forTableColumn());
         name_col.setCellFactory(TextFieldTableCell.forTableColumn());
         date_col.setCellFactory(TextFieldTableCell.forTableColumn());
         gender_col.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -109,8 +116,8 @@ public class man_client_controller implements Initializable {
     }
     @FXML
     private void updateNameHandler(TableColumn.CellEditEvent event){
-        Client client = table.getSelectionModel().getSelectedItem();
-        String edit = "call updateNameClient("+client.getCid()+",'"+event.getNewValue()+"')";
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updateNameEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
@@ -122,8 +129,8 @@ public class man_client_controller implements Initializable {
     }
     @FXML
     private void updateDateHandler(TableColumn.CellEditEvent event){
-        Client client = table.getSelectionModel().getSelectedItem();
-        String edit = "call updateDateClient("+client.getCid()+",'"+event.getNewValue()+"')";
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updateDateEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
@@ -135,8 +142,8 @@ public class man_client_controller implements Initializable {
     }
     @FXML
     private void updateGenderHandler(TableColumn.CellEditEvent event){
-        Client client = table.getSelectionModel().getSelectedItem();
-        String edit = "call updateGenderClient("+client.getCid()+",'"+event.getNewValue()+"')";
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updateGenderEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
@@ -148,8 +155,34 @@ public class man_client_controller implements Initializable {
     }
     @FXML
     private void updateAddressHandler(TableColumn.CellEditEvent event){
-        Client client = table.getSelectionModel().getSelectedItem();
-        String edit = "call updateAddressClient("+client.getCid()+",'"+event.getNewValue()+"')";
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updateAddressEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
+            Statement stmt = con.createStatement();
+            stmt.executeQuery(edit);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void updateSalaryHandler(TableColumn.CellEditEvent event){
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updateSalaryEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
+            Statement stmt = con.createStatement();
+            stmt.executeQuery(edit);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void updatePasswordHandler(TableColumn.CellEditEvent event){
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updatePasswordEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
@@ -161,8 +194,8 @@ public class man_client_controller implements Initializable {
     }
     @FXML
     private void updatePhoneHandler(TableColumn.CellEditEvent event){
-        Client client = table.getSelectionModel().getSelectedItem();
-        String edit = "call updatePhoneClient("+client.getCid()+",'"+event.getNewValue()+"')";
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        String edit = "call updatePhoneEmployee('"+employee.getUserName()+"','"+event.getNewValue()+"')";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
@@ -172,49 +205,43 @@ public class man_client_controller implements Initializable {
             e.printStackTrace();
         }
     }
-
     @FXML
-    private void deleteClient(ActionEvent event){
-        int cid = table.getSelectionModel().getSelectedItem().getCid();
-        String delete_client = "call deleteClient("+cid+")";
+    private void deleteEmployee(ActionEvent event){
+        String userName = table.getSelectionModel().getSelectedItem().getUserName();
+        String delete_employee = "call deleteEmployee('"+userName+"')";
         table.getItems().remove(table.getSelectionModel().getSelectedItem());
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
-            stmt.executeQuery(delete_client);
+            stmt.executeQuery(delete_employee);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     @FXML
     private void update(ActionEvent event){
-        int cid;
-        String cname,birthdate,gender,address,phonenum;
+        String username,pass,name,birthdate,gender,address,phonenum,salary;
         table.getItems().removeAll(table.getItems());
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
-            String get_data = "select *from Client";
+            String get_data = "select *from Employee";
             ResultSet rs = stmt.executeQuery(get_data);
             while(rs.next()){
-                cid = rs.getInt(1);
-                cname = rs.getString(2);
-                birthdate = rs.getString(3);
-                gender = rs.getString(4);
-                address = rs.getString(5);
-                phonenum = rs.getString(6);
-                table.getItems().add(new Client(cid,cname,birthdate,gender,address,phonenum));
+                username = rs.getString(1);
+                pass = rs.getString(2);
+                name = rs.getString(3);
+                birthdate = rs.getString(4);
+                gender = rs.getString(5);
+                address = rs.getString(6);
+                phonenum = rs.getString(7);
+                table.getItems().add(new Employee(username,pass,name,birthdate,gender,address,phonenum));
             }
 
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-    @FXML
-    private void handleSearchEvent(ActionEvent event){
-        String data = search_field.getText();
-        String get_data = "select * from Client where Cid="+data;
     }
 }
