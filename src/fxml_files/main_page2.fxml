@@ -77,25 +77,6 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="emp_box" onMouseClicked="#handleAddEmployeeAction">
-               <children>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/add_employee.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin></ImageView>
-                  <Label maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="180.0" text="Manage Employee" textFill="WHITE">
-                     <font>
-                        <Font name="Abyssinica SIL" size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
             <HBox fx:id="add_client" onMouseClicked="#handleAddClientAction">
                <VBox.margin>
                   <Insets />

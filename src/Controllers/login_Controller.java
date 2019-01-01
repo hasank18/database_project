@@ -65,7 +65,7 @@ public class login_Controller implements Initializable {
     @FXML
     private void eventHandler(ActionEvent event) throws Exception {
         if(checkInfo()&&login()) {
-            Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page2.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -83,21 +83,19 @@ public class login_Controller implements Initializable {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
             Statement stmt = con.createStatement();
             String data = "select UserName,Password  from Employee where UserName='" + UserName + "'and Password='" + Password + "'";
-            System.out.println(data);
-//            ResultSet rs2 = stmt.executeQuery(data);
-//            if (rs2.next()) {
-//                return true;
-//            } else {
-//                showresult.setText("failed to login");
-//                return false;
-//            }
+            ResultSet rs2 = stmt.executeQuery(data);
+            if (rs2.next()) {
+                return true;
+            } else {
+                showresult.setText("failed to login");
+                return false;
+            }
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }
-        return true;
     }
     private boolean checkInfo() {
         boolean flag = false;

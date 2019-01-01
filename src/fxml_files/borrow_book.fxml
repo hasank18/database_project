@@ -16,6 +16,13 @@
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
          <children>
+            <Label text="Enter Your ID">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Id_field" />
+            <Label fx:id="no_id" />
             <Label text="Enter Client ID">
                <font>
                   <Font size="18.0" />
