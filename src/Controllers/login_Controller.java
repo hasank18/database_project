@@ -70,10 +70,6 @@ public class login_Controller implements Initializable {
             stage.show();
         }
     }
-    @FXML
-    private void eventHandler2(ActionEvent event) throws Exception {
-
-    }
 
 
     private boolean login () {
