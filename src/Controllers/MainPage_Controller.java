@@ -63,7 +63,7 @@ public class MainPage_Controller implements Initializable {
         emp_box.setStyle("-fx-background-color: #00001f;");
         lib_box.setStyle("-fx-background-color: #00001f;");
         book_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/add_book.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/manage_books.fxml"));
         switch_pane.getChildren().setAll(pane);
     }
     @FXML
