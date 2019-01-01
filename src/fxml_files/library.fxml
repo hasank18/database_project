@@ -23,6 +23,7 @@
                   <Insets bottom="8.0" />
                </VBox.margin>
             </AnchorPane>
+            <Label fx:id="not_found" />
             <HBox maxWidth="1.7976931348623157E308" prefWidth="200.0">
                <children>
                   <Label text="Choose Category to filter">

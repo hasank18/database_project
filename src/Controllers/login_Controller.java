@@ -60,88 +60,45 @@ public class login_Controller implements Initializable {
 
 
     }
-
-//    private String getUserName() {
-//        String UserName ="";
-//
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
-//            pst = con.prepareStatement("select UserName from Employee where UserName = ?");
-//            pst.setString(1, name.getText());
-//            rs = pst.executeQuery();
-//            if (rs.next())
-//                UserName = rs.getString(1);
-//            rs.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//
-//        }
-//        System.out.println(UserName);
-//        return UserName;
-//    }
-//
-//    private String getPassword() {
-//        String Password ="";
-//
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
-//            pst = con.prepareStatement("select Password from Employee where Password = ?");
-//            pst.setString(1, pass.getText());
-//            rs = pst.executeQuery();
-//            if (rs.next())
-//                Password = rs.getString(1);
-//            rs.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(Password);
-//
-//
-//        return Password;
-//    }
     @FXML
-private void eventHandler(ActionEvent event) throws Exception {
-
-
-        Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page2.fxml"));
-        Scene scene = new Scene(parent);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+    private void eventHandler(ActionEvent event) throws Exception {
+        if(checkInfo()&&login()) {
+            Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page2.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
     @FXML
     private void eventHandler2(ActionEvent event) throws Exception {
-        if(checkInfo())
-            login();
+
     }
 
 
-    private void login () {
-            String UserName = name.getText();
-            String Password = pass.getText();
+    private boolean login () {
+        String UserName = name.getText();
+        String Password = pass.getText();
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
-                Statement stmt = con.createStatement();
-                ResultSet rs2 = stmt.executeQuery("select UserName,Password  from Employee where UserName= + UserName and Password= + Password");
-
-                if (rs2.next()) {
-
-                    showresult.setText(" login");
-                } else {
-                    showresult.setText("failed to login");
-                }
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
+            Statement stmt = con.createStatement();
+            String data = "select UserName,Password  from Employee where UserName='" + UserName + "'and Password='" + Password + "'";
+            ResultSet rs2 = stmt.executeQuery(data);
+            if (rs2.next()) {
+                return true;
+            } else {
+                showresult.setText("failed to login");
+                return false;
             }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
         }
+    }
     private boolean checkInfo() {
         boolean flag = false;
         if (name.getText().isEmpty()) {

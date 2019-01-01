@@ -33,6 +33,8 @@ public class Lib_Controller implements Initializable {
     @FXML
     TableView<Books> table;
     @FXML
+    Label not_found;
+    @FXML
     TextField book_name_field;
     @FXML
     HBox container;
@@ -142,8 +144,9 @@ public class Lib_Controller implements Initializable {
             rs2.next();
             cat = rs2.getString(1);
         }catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            not_found.setText("Book Not Found");
+            not_found.setTextFill(Color.web("red"));
+
         }
 
         table.getItems().add(new Books(id,name,amount,auth,cat));
