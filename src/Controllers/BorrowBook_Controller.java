@@ -23,9 +23,9 @@ public class BorrowBook_Controller implements Initializable {
     String jdbcurl;
     Connection con=null;
     @FXML
-    Label no_cid,no_bid,no_date;
+    Label no_cid,no_bid,no_date,no_id;
     @FXML
-    TextField cid_field,bid_field;
+    TextField cid_field,bid_field,Id_field;
     @FXML
     DatePicker sdate,edate;
     @Override
@@ -38,6 +38,7 @@ public class BorrowBook_Controller implements Initializable {
     }
 
     private void addOrder() {
+        String id = Id_field.getText();
         String cid = cid_field.getText();
         String bid = bid_field.getText();
         String stdate=""+sdate.getValue().getYear()+"-"+sdate.getValue().getMonthValue()+"-"+sdate.getValue().getDayOfMonth();
@@ -46,7 +47,7 @@ public class BorrowBook_Controller implements Initializable {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
             Statement stmt = con.createStatement();
-            String addBorrow="call addBorrow('"+stdate+"','"+endate+"',"+cid+","+bid+")";
+            String addBorrow="call addBorrow('"+stdate+"','"+endate+"',"+cid+","+bid+","+id+")";
             System.out.println(addBorrow);
             stmt.executeQuery(addBorrow);
         }catch (Exception e){
@@ -58,6 +59,13 @@ public class BorrowBook_Controller implements Initializable {
 
     private boolean checkInfo() {
         boolean flag=false;
+        if(Id_field.getText().isEmpty()){
+            no_id.setText("Please enter user ID");
+            no_id.setTextFill(Color.web("red"));
+            flag=false;
+        }
+        else
+            no_id.setText("");
 
         if(cid_field.getText().isEmpty()){
             no_cid.setText("Please enter user ID");
@@ -80,7 +88,7 @@ public class BorrowBook_Controller implements Initializable {
         }
         else
             no_date.setText("");
-        if(sdate.getValue()!=null&&edate.getValue()!=null&&!cid_field.getText().isEmpty()&&!bid_field.getText().isEmpty())
+        if(sdate.getValue()!=null&&edate.getValue()!=null&&!cid_field.getText().isEmpty()&&!bid_field.getText().isEmpty()&&!Id_field.getText().isEmpty())
             flag = true;
         return flag;
     }
