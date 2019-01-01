@@ -1,0 +1,428 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Author`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Author` (
+  `Author_id` INT NOT NULL auto_increment,
+  `AuthorName` VARCHAR(45) NULL,
+  PRIMARY KEY (`Author_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Category` (
+  `Category_id` INT NOT NULL auto_increment,
+  `CategoryName` VARCHAR(45) NULL,
+  PRIMARY KEY (`Category_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Books`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Books` (
+  `Book_id` INT NOT NULL auto_increment,
+  `BookName` VARCHAR(45) NULL,
+  `Amount` INT NULL,
+  `Author_Author_id` INT NOT NULL,
+  `Category_Category_id1` INT NOT NULL,
+  PRIMARY KEY (`Book_id`, `Author_Author_id`, `Category_Category_id1`),
+  CONSTRAINT `fk_Books_Author`
+    FOREIGN KEY (`Author_Author_id`)
+    REFERENCES `mydb`.`Author` (`Author_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Books_Category1`
+    FOREIGN KEY (`Category_Category_id1`)
+    REFERENCES `mydb`.`Category` (`Category_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Books_Author_idx` ON `mydb`.`Books` (`Author_Author_id` ASC);
+
+CREATE INDEX `fk_Books_Category1_idx` ON `mydb`.`Books` (`Category_Category_id1` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Client`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Client` (
+  `Cid` INT NOT NULL auto_increment,
+  `Cname` VARCHAR(45) NULL,
+  `BirthDate` VARCHAR(45) NULL,
+  `Gender` VARCHAR(45) NULL,
+  `Address` VARCHAR(45) NULL,
+  `PhoneNum` VARCHAR(45) NULL,
+  PRIMARY KEY (`Cid`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Borrows`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Borrows` (
+  `Borrow_id` INT NOT NULL auto_increment,
+  `FromDate` VARCHAR(45) NULL,
+  `ToDate` VARCHAR(45) NULL,
+  `Client_Cid` INT NOT NULL,
+  `Books_Book_id` INT NOT NULL,
+  PRIMARY KEY (`Borrow_id`, `Client_Cid`, `Books_Book_id`),
+  CONSTRAINT `fk_Borrows_Client1`
+    FOREIGN KEY (`Client_Cid`)
+    REFERENCES `mydb`.`Client` (`Cid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Borrows_Books1`
+    FOREIGN KEY (`Books_Book_id`)
+    REFERENCES `mydb`.`Books` (`Book_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Borrows_Client1_idx` ON `mydb`.`Borrows` (`Client_Cid` ASC);
+
+CREATE INDEX `fk_Borrows_Books1_idx` ON `mydb`.`Borrows` (`Books_Book_id` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (
+  `UserName` varchar(15) NOT NULL unique,
+  `Password` varchar(45) NOT NULL,
+  `Ename` VARCHAR(45) NULL,
+  `BirthDate` VARCHAR(45) NULL,
+  `Address` VARCHAR(45) NULL,
+  `PhoneNum` VARCHAR(45) NULL,
+  `Gender` VARCHAR(45) NULL,
+  `Salary` VARCHAR(45),
+  PRIMARY KEY (`UserName`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Employee make order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Employee_make_order` (
+  `UserName` varchar(45) unique NOT NULL ,
+  `Books_Book_id` INT NOT NULL,
+  PRIMARY KEY (`UserName`, `Books_Book_id`),
+  CONSTRAINT `fk_Employee_has_Books_Employee1`
+    FOREIGN KEY (`UserName`)
+    REFERENCES `mydb`.`Employee` (`UserName`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Employee_has_Books_Books1`
+    FOREIGN KEY (`Books_Book_id`)
+    REFERENCES `mydb`.`Books` (`Book_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Employee_has_Books_Books1_idx` ON `mydb`.`Employee_make_order` (`Books_Book_id` ASC);
+
+CREATE INDEX `fk_Employee_has_Books_Employee1_idx` ON `mydb`.`Employee_make_order` (`UserName` ASC);
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------------------------------------
+-- Adding Ttriggers
+-- -----------------------------------------------------------------------------------
+
+create trigger TDB_BOOKS before delete
+on Books for each row
+begin
+end;
+
+
+create trigger TUB_BOOKS before update
+on Books for each row
+begin
+end;
+
+
+create trigger TIB_BORROWS before insert
+on Borrows for each row
+begin
+end;
+
+
+create trigger TUB_BORROWS before update
+on Borrows for each row
+begin
+end;
+
+
+create trigger TIB_EMPLOYEE_MAKE_ORDER before insert
+on Employee_make_order for each row
+begin
+end;
+
+
+create trigger TUB_EMPLOYEE_MAKE_ORDER before update
+on Employee_make_order for each row
+begin
+end;
+
+-- -----------------------------------------------------------
+-- End of Triggers
+-- -----------------------------------------------------------
+
+-- -----------------------------------------------------------
+-- Adding Procedures
+-- -----------------------------------------------------------
+DELIMITER $$
+ create procedure addAuthor (in AName varchar(45))
+ begin
+ insert into Author
+ (AuthorName) values(  AName);
+ end $$
+ DELIMITER ;
+ 
+ DELIMITER $$
+ create procedure addCategory (in CategoryName varchar(45))
+ begin
+ insert into Category
+ (CategoryName) values( CategoryName);
+ end $$
+ DELIMITER ;
+ 
+ DELIMITER $$
+CREATE PROCEDURE addBook
+(
+in  BookName varchar(45),
+in Amount INT ,in Author_Author_id INT,in Category_Category_id1 INT)
+begin
+insert into Books(BookName,Amount,Author_Author_id,Category_Category_id1)
+values(BookName,Amount,Author_Author_id,Category_Category_id1);
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE addclient
+(in  Cname varchar(45),in BirthDate varchar(45) ,in  Gender varchar(45),in Address varchar(45),in PhoneNum varchar(45))
+begin
+insert into Client(Cname,BirthDate,Gender,Address,PhoneNum)
+values(Cname,BirthDate,Gender,Address,PhoneNum);
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE addemployee
+(in UserName varchar(15),in Password varchar(45),in Ename varchar(45),in BirthDate varchar(45) ,in  Gender varchar(45),in Address varchar(45),in PhoneNum varchar(45),in Salary varchar(45))
+begin
+insert into Employee(UserName,Password,Ename,BirthDate,Gender,Address,PhoneNum,Salary)
+values(UserName,Password,Ename,BirthDate,Gender,Address,PhoneNum,Salary);
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE addBorrows
+(in FromDate varchar(15),in ToDate varchar(45),in Client_Cid int,in Books_Book_id int)
+begin
+insert into Borrows(FromDate,ToDate,Client_Cid,Books_Book_id)
+values(FromDate,ToDate,Client_Cid,Books_Book_id);
+end $$
+DELIMITER ;
+
+
+
+ DELIMITER $$
+ CREATE procedure  Find_id(IN Authorid varchar(45))
+BEGIN
+ select AuthorName
+ from Author 
+ where Author_id= Authorid ;
+  END $$
+ DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updatePhoneClient
+(in cid int,
+in phone varchar(45))
+begin
+update Client
+set
+PhoneNum=phone
+where Client.Cid=cid;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateNameClient
+(in cid int,
+in cname varchar(45))
+begin
+update Client
+set
+Cname=cname
+where Client.Cid=cid;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateDateClient
+(in cid int,
+in birthDate varchar(45))
+begin
+update Client
+set
+BirthDate=birthDate
+where Client.Cid=cid;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateGenderClient
+(in cid int,
+in gender varchar(45))
+begin
+update Client
+set
+Gender=gender
+where Client.Cid=cid;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateAddressClient
+(in cid int,
+in address varchar(45))
+begin
+update Client
+set
+Address=address
+where Client.Cid=cid;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure deleteCLient(in CID int)
+begin
+delete from Client where Client.Cid=CID;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updatePhoneEmployee
+(in username varchar(45),
+in phone varchar(45))
+begin
+update Employee
+set
+PhoneNum=phone
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateNameEmployee
+(in username varchar(45),
+in ename varchar(45))
+begin
+update Employee
+set
+Ename=ename
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateDateEmployee
+(in username varchar(45),
+in birthDate varchar(45))
+begin
+update Employee
+set
+BirthDate=birthDate
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateGenderEmployee
+(username varchar(45),
+in gender varchar(45))
+begin
+update Employee
+set
+Gender=gender
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateAddressEmployee
+(username varchar(45),
+in address varchar(45))
+begin
+update Employee
+set
+Address=address
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updatePasswordEmployee
+(username varchar(45),
+in password varchar(45))
+begin
+update Employee
+set
+Password=password
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE updateSalaryEmployee
+(username varchar(45),
+in salary varchar(45))
+begin
+update Employee
+set
+Salary=salary
+where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure deleteEmployee(in username varchar(45))
+begin
+delete from Employee where Employee.UserName=username;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure addBorrow(in FromDate varchar(45),in ToDate varchar(45),in Client_Cid int,in Books_Book_id int)
+begin
+insert into Borrows(FromDate,ToDate,Client_Cid,Books_Book_id)
+values(FromDate,ToDate,Client_Cid,Books_Book_id);
+end $$
+DELIMITER ;
+
+
+-- ----------------------------------------------------
+-- End of Procedures
+-- ----------------------------------------------------  
