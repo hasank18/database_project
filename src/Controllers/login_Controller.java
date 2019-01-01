@@ -39,6 +39,8 @@ public class login_Controller implements Initializable {
     private PreparedStatement pst;
     private ResultSet rs;
 
+
+
    @FXML
    private Button Btn;
     @FXML
@@ -81,19 +83,21 @@ public class login_Controller implements Initializable {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
             Statement stmt = con.createStatement();
             String data = "select UserName,Password  from Employee where UserName='" + UserName + "'and Password='" + Password + "'";
-            ResultSet rs2 = stmt.executeQuery(data);
-            if (rs2.next()) {
-                return true;
-            } else {
-                showresult.setText("failed to login");
-                return false;
-            }
+            System.out.println(data);
+//            ResultSet rs2 = stmt.executeQuery(data);
+//            if (rs2.next()) {
+//                return true;
+//            } else {
+//                showresult.setText("failed to login");
+//                return false;
+//            }
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }
+        return true;
     }
     private boolean checkInfo() {
         boolean flag = false;
