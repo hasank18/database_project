@@ -41,13 +41,13 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                     </BorderPane.margin>
                     <columns>
-                        <TableColumn fx:id="username_col" editable="true" prefWidth="75.0" text="User Name" />
+                        <TableColumn fx:id="username_col"  prefWidth="75.0" text="User Name" />
                         <TableColumn fx:id="pass_col" onEditCommit="#updatePasswordHandler" prefWidth="75.0" text="Password" />
-                        <TableColumn fx:id="name_col" editable="true" onEditCommit="#updateNameHandler" prefWidth="75.0" text="name" />
-                        <TableColumn fx:id="date_col" editable="true" onEditCommit="#updateDateHandler" prefWidth="75.0" text="birthdate" />
-                        <TableColumn fx:id="address_col" editable="true" onEditCommit="#updateAddressHandler" prefWidth="75.0" text="address" />
-                        <TableColumn fx:id="number_col" editable="true" onEditCommit="#updatePhoneHandler" prefWidth="112.0" text="Phone Number" />
-                        <TableColumn fx:id="gender_col" editable="true" onEditCommit="#updateGenderHandler" prefWidth="75.0" text="gender" />
+                        <TableColumn fx:id="name_col" onEditCommit="#updateNameHandler" prefWidth="75.0" text="name" />
+                        <TableColumn fx:id="date_col" onEditCommit="#updateDateHandler" prefWidth="75.0" text="birthdate" />
+                        <TableColumn fx:id="address_col" onEditCommit="#updateAddressHandler" prefWidth="75.0" text="address" />
+                        <TableColumn fx:id="number_col" onEditCommit="#updatePhoneHandler" prefWidth="112.0" text="Phone Number" />
+                        <TableColumn fx:id="gender_col" onEditCommit="#updateGenderHandler" prefWidth="75.0" text="gender" />
                         <TableColumn fx:id="salary_col" onEditCommit="#updateSalaryHandler" prefWidth="75.0" text="salary" />
                     </columns>
                 </TableView>

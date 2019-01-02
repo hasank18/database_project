@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BorrowBook_Controller">
+<AnchorPane fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BorrowBook_Controller">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
          <children>
-            <Label text="Enter Your ID">
+            <Label text="Enter Your User Name">
                <font>
                   <Font size="18.0" />
                </font>
@@ -87,6 +87,7 @@
                <children>
                   <Button layoutX="538.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <Button layoutX="14.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleSubmitEvent" prefHeight="25.0" prefWidth="165.0" text="Submit" />
+                  <Button fx:id="recipient" layoutX="478.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleRecipientEvent" text="Go To Recipient" visible="false" />
                </children>
             </AnchorPane>
          </children>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Recipient_Controller">
+   <children>
+      <Label layoutX="14.0" layoutY="20.0" text="Book Shop" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <Label layoutX="14.0" layoutY="36.0" text="Employee name:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="36.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <Label fx:id="emp_name" layoutX="134.0" layoutY="38.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <Label layoutX="14.0" layoutY="52.0" text="Clinet Name:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="52.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <Label fx:id="cname" layoutX="109.0" layoutY="54.0" AnchorPane.leftAnchor="109.0" AnchorPane.topAnchor="54.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <Label layoutX="14.0" layoutY="68.0" text="CLient ID:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="68.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <Label fx:id="cid" layoutX="88.0" layoutY="68.0" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="68.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
+      <TableView fx:id="table" layoutX="136.0" layoutY="100.0" prefWidth="329.0" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="135.39697265625">
+        <columns>
+          <TableColumn fx:id="bid_col" prefWidth="75.0" text="Book ID" />
+          <TableColumn fx:id="bname_col" prefWidth="75.0" text="Book Name" />
+            <TableColumn fx:id="fdate_col" prefWidth="75.0" text="From Date" />
+            <TableColumn fx:id="tdate_col" prefWidth="75.0" text="To Date" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label fx:id="date" layoutX="521.0" layoutY="30.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="30.0" />
+      <Label layoutX="228.0" layoutY="48.0" text="Phone Number:" AnchorPane.leftAnchor="228.0" AnchorPane.topAnchor="48.0" />
+      <Label layoutX="228.0" layoutY="66.0" text="Address:" AnchorPane.leftAnchor="228.0" AnchorPane.topAnchor="66.0" />
+      <Label fx:id="number" layoutX="330.0" layoutY="48.0" />
+      <Label fx:id="address" layoutX="285.0" layoutY="66.0" />
+   </children>
+</AnchorPane>

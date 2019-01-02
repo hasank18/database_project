@@ -58,7 +58,7 @@ public class add_employee_controller implements Initializable {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
             Statement stmt = con.createStatement();
-            String test = "call addemployee("+"'"+UserName+"',"+"'"+Password+"',"+"'"+cname+"'"+","+"'"+birthdate+"'"+","+"'"+gender+"'"+","+"'"+address+"'"+","+"'"+phone+"','600$')";
+            String test = "call addemployee("+"'"+UserName+"',"+"'"+Password+"',"+"'"+cname+"',"+"'"+gender+"','"+address+"','"+phone+"','600$','"+birthdate+"')";
             ResultSet rs = stmt.executeQuery(test);
         } catch (java.sql.SQLIntegrityConstraintViolationException e) {
             no_UserName.setText("User name already taken");

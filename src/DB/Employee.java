@@ -3,7 +3,7 @@ package DB;
 public class Employee {
     private String UserName,password,name,birthdate,address,phoneNum,gender,salary;
 
-    public Employee(String userName, String password, String name, String birthdate, String address, String phoneNum, String gender) {
+    public Employee(String userName, String password, String name, String address, String phoneNum, String gender, String birthdate) {
         UserName = userName;
         this.password = password;
         this.name = name;

@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
@@ -36,8 +35,6 @@ public class man_employee_controller implements Initializable {
     TableColumn<Employee,String> username_col,name_col,date_col,gender_col,address_col,number_col,salary_col,pass_col;
     @FXML
     Button update;
-    @FXML
-    TextField search_field;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String username,pass,name,birthdate,gender,address,phonenum;
@@ -79,17 +76,17 @@ public class man_employee_controller implements Initializable {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
-            String get_data = "select *from Employee";
+            String get_data = "select *from Employee;";
             ResultSet rs = stmt.executeQuery(get_data);
             while(rs.next()){
                 username = rs.getString(1);
                 pass = rs.getString(2);
                 name = rs.getString(3);
-                birthdate = rs.getString(4);
-                gender = rs.getString(5);
-                address = rs.getString(6);
-                phonenum = rs.getString(7);
-                table.getItems().add(new Employee(username,pass,name,birthdate,gender,address,phonenum));
+                gender = rs.getString(4);
+                address = rs.getString(5);
+                phonenum = rs.getString(6);
+                birthdate = rs.getNString(8);
+                table.getItems().add(new Employee(username,pass,name,gender,address,phonenum,birthdate));
             }
 
         }catch (Exception e){
@@ -221,7 +218,7 @@ public class man_employee_controller implements Initializable {
     }
     @FXML
     private void update(ActionEvent event){
-        String username,pass,name,birthdate,gender,address,phonenum,salary;
+        String username,pass,name,birthdate,gender,address,phonenum;
         table.getItems().removeAll(table.getItems());
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -233,11 +230,11 @@ public class man_employee_controller implements Initializable {
                 username = rs.getString(1);
                 pass = rs.getString(2);
                 name = rs.getString(3);
-                birthdate = rs.getString(4);
-                gender = rs.getString(5);
-                address = rs.getString(6);
-                phonenum = rs.getString(7);
-                table.getItems().add(new Employee(username,pass,name,birthdate,gender,address,phonenum));
+                birthdate = rs.getString(8);
+                gender = rs.getString(4);
+                address = rs.getString(5);
+                phonenum = rs.getString(6);
+                table.getItems().add(new Employee(username,pass,name,gender,address,phonenum,birthdate));
             }
 
         }catch (Exception e){

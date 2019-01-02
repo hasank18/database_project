@@ -154,6 +154,7 @@ public class Lib_Controller implements Initializable {
     }
     @FXML
     private void handleFilterEvent(ActionEvent event){
+        table.getItems().removeAll(table.getItems());
         if(category.getValue()==null){
             Label label= new Label("please choose an option");
             label.setTextFill(Color.web("red"));
