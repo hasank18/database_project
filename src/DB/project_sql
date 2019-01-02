@@ -536,3 +536,15 @@ call addclient("hussein","1980-11-12","male","beirut","78-112233");
  select *from Author;
  select *from Category;
 
+
+ -- Altered table Employee
+ ALTER TABLE Employee drop Employee.BirthDate;
+ ALTER TABLE Employee add eBirthDate varchar(45);
+ -- end ALter
+ -- create view for recepient
+ create view recepient
+ as select Employee.UserName,Employee.Ename,Client.Cid,Borrows.Books_Book_id,Books.BookName,Client.PhoneNum,Client.Address,FromDate,ToDate from Borrows
+ INNER JOIN Employee on Employee.UserName=Borrows.Employee_UserName
+ INNER JOIN Client on Client.Cid=Borrows.Client_Cid
+ INNER JOIN Books on Books.Book_id=Books_Book_id;
+
