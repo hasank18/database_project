@@ -154,9 +154,7 @@ public class man_book_controller implements Initializable {
     @FXML
     private void deleteBook(ActionEvent event){
         String id = table.getSelectionModel().getSelectedItem().getId();
-        String Eid = table.getSelectionModel().getSelectedItem().getAuth();
-        String Cid=table.getSelectionModel().getSelectedItem().getCat();
-        String delete_Book = "call deletebk('"+id+ "','"+Eid+"',"+Cid+")";
+        String delete_Book = "call delbook('"+id+ "')";
         table.getItems().remove(table.getSelectionModel().getSelectedItem());
         try{
             Class.forName("com.mysql.jdbc.Driver");
