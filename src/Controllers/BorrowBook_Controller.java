@@ -46,12 +46,12 @@ public class BorrowBook_Controller implements Initializable {
     @FXML
     private void handleSubmitEvent(ActionEvent event){
         if(checkInfo()) {
-            addOrder();
+            if(addOrder())
             recipient.setVisible(true);
         }
     }
 
-    private void addOrder() {
+    private boolean addOrder() {
         String id = Id_field.getText();
         String cid = cid_field.getText();
         String bid = bid_field.getText();
@@ -65,10 +65,12 @@ public class BorrowBook_Controller implements Initializable {
             System.out.println(addBorrow);
             stmt.executeQuery(addBorrow);
             counter ++;
+            return true;
         }catch (Exception e){
             no_date.setText("Failed to add");
             no_date.setTextFill(Color.web("red"));
             e.printStackTrace();
+            return false;
         }
     }
 
