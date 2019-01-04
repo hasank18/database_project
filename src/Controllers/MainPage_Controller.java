@@ -38,7 +38,7 @@ public class MainPage_Controller implements Initializable {
     }
     @FXML
     public void handleLibraryAction(javafx.event.Event actionEvent)throws Exception{
-        emp_box.setStyle("-fx-background-color: #00001f;");
+//        emp_box.setStyle("-fx-background-color: #00001f;");
         book_box.setStyle("-fx-background-color: #00001f;");
         bor_box.setStyle("-fx-background-color: #00001f;");
         add_client.setStyle("-fx-background-color: #00001f;");
@@ -47,20 +47,20 @@ public class MainPage_Controller implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/library.fxml"));
         switch_pane.getChildren().setAll(pane);
     }
-    @FXML
-    public void handleAddEmployeeAction(javafx.event.Event actionEvent)throws Exception{
-        bor_box.setStyle("-fx-background-color: #00001f;");
-        lib_box.setStyle("-fx-background-color: #00001f;");
-        book_box.setStyle("-fx-background-color: #00001f;");
-        add_client.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: green;");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/manage_employee.fxml"));
-        switch_pane.getChildren().setAll(pane);
-    }
+//    @FXML
+//    public void handleAddEmployeeAction(javafx.event.Event actionEvent)throws Exception{
+//        bor_box.setStyle("-fx-background-color: #00001f;");
+//        lib_box.setStyle("-fx-background-color: #00001f;");
+//        book_box.setStyle("-fx-background-color: #00001f;");
+//        add_client.setStyle("-fx-background-color: #00001f;");
+//        emp_box.setStyle("-fx-background-color: green;");
+//        AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/manage_employee.fxml"));
+//        switch_pane.getChildren().setAll(pane);
+//    }
     @FXML
     public void handleAddBookAction(javafx.event.Event actionEvent)throws Exception{
         bor_box.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: #00001f;");
+//        emp_box.setStyle("-fx-background-color: #00001f;");
         lib_box.setStyle("-fx-background-color: #00001f;");
         book_box.setStyle("-fx-background-color: green;");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../fxml_files/manage_books.fxml"));
@@ -69,7 +69,7 @@ public class MainPage_Controller implements Initializable {
     @FXML
     public void handleBorrowBookAction(javafx.event.Event actionEvent)throws Exception{
         book_box.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: #00001f;");
+//        emp_box.setStyle("-fx-background-color: #00001f;");
         lib_box.setStyle("-fx-background-color: #00001f;");
         add_client.setStyle("-fx-background-color: #00001f;");
         bor_box.setStyle("-fx-background-color: green;");
@@ -80,7 +80,7 @@ public class MainPage_Controller implements Initializable {
     @FXML
     public void handleAddClientAction(javafx.event.Event actionEvent)throws Exception{
         book_box.setStyle("-fx-background-color: #00001f;");
-        emp_box.setStyle("-fx-background-color: #00001f;");
+//        emp_box.setStyle("-fx-background-color: #00001f;");
         lib_box.setStyle("-fx-background-color: #00001f;");
         bor_box.setStyle("-fx-background-color: #00001f;");
         add_client.setStyle("-fx-background-color: green;");

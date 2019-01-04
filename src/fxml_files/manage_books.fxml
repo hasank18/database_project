@@ -48,6 +48,9 @@
                         <TableColumn fx:id="bookauth_col" editable="true" onEditCommit="#updateAuthorHandler" prefWidth="105.0" text="Author" />
 
                     </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
                 </TableView>
             </center>
             <bottom>
