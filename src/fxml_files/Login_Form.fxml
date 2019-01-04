@@ -18,7 +18,7 @@
             </effect></FontAwesomeIconView>
         <Icons525View fill="#0f9a0f" glyphName="LOCK" layoutX="56.0" layoutY="255.0" size="25" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
         <Icons525View fill="#0f9a0f" glyphName="USER" layoutX="57.0" layoutY="172.0" size="25" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="24.0" />
-        <Button id="btnLogin" fx:id="btnlogin" layoutX="146.0" layoutY="331.0" mnemonicParsing="false" onAction="#eventHandler" prefHeight="29.0" prefWidth="93.0" text="LOGIN" textAlignment="CENTER" textFill="#617550" textOverrun="LEADING_WORD_ELLIPSIS">
+        <Button id="btnLogin" fx:id="btnlogin" layoutX="146.0" layoutY="331.0" mnemonicParsing="false" onAction="#eventHandler"  prefHeight="29.0" prefWidth="93.0" text="LOGIN" textAlignment="CENTER" textFill="#617550" textOverrun="LEADING_WORD_ELLIPSIS">
             <font>
                 <Font name="525icons" size="17.0" />
             </font>

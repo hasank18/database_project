@@ -28,7 +28,7 @@ public class Lib_Controller implements Initializable {
     private Connection con=null;
     private Label label = new Label();
     private TextField textField = new TextField();
-    private DatePicker datePicker = new DatePicker();
+
     private ChoiceBox<String> choiceBox = new ChoiceBox<String>();
     @FXML
     TableView<Books> table;
@@ -47,7 +47,7 @@ public class Lib_Controller implements Initializable {
 
     @FXML
     private void FillChoiceBox(){
-        category.getItems().addAll("Category","Date","Amount");
+        category.getItems().addAll("Category","Amount");
     }
     @FXML
     private void displayValue(ActionEvent event){
@@ -57,8 +57,7 @@ public class Lib_Controller implements Initializable {
         String choice = category.getValue();
         if(choice.equals("Category"))
             ChooseCategory();
-        else if(choice.equals("Date"))
-            ChooseDate();
+
         else if(choice.equals("Amount")){
             ChooseAmount();
         }
@@ -73,12 +72,7 @@ public class Lib_Controller implements Initializable {
         container.setMargin(textField,new Insets(0,0,0,8));
     }
 
-    private void ChooseDate() {
-        label.setText("Choose date");
-        container.getChildren().addAll(label,datePicker);
-        container.setMargin(label,new Insets(0,8,0,0));
-        container.setMargin(datePicker,new Insets(0,0,0,8));
-    }
+
 
     private void ChooseCategory() {
         label.setText("Choose Category");
@@ -161,8 +155,6 @@ public class Lib_Controller implements Initializable {
             container.getChildren().removeAll(container.getChildren());
             container.getChildren().add(label);
         }
-        else if(category.getValue().equals("Date"))
-            search_date();
         else if(category.getValue().equals("Amount")){
             search_amount();
         }
@@ -209,7 +201,7 @@ public class Lib_Controller implements Initializable {
         String get_data = "select *from Books where Amount="+amount2;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
             ResultSet rs2 = stmt.executeQuery(get_data);
             ArrayList<Integer> auth_id = new ArrayList<>();
@@ -239,8 +231,7 @@ public class Lib_Controller implements Initializable {
         }
     }
 
-    private void search_date() {
-    }
+
 
     private void search_category() {
         TableColumn<Books,String> col1= new TableColumn<>("ID");
@@ -281,7 +272,7 @@ public class Lib_Controller implements Initializable {
         String get_cat_id="select Category_id from Category where CategoryName='"+choiceBox.getValue()+"'";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","" + "" );
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
             ResultSet rs = stmt.executeQuery(get_cat_id);
             rs.next();

@@ -176,7 +176,7 @@ public class man_client_controller implements Initializable {
     @FXML
     private void deleteClient(ActionEvent event){
         int cid = table.getSelectionModel().getSelectedItem().getCid();
-        String delete_client = "call deleteClient("+cid+")";
+        String delete_client = "call deleteCLient("+cid+")";
         table.getItems().remove(table.getSelectionModel().getSelectedItem());
         try{
             Class.forName("com.mysql.jdbc.Driver");
