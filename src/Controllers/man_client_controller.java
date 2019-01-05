@@ -105,7 +105,7 @@ public class man_client_controller implements Initializable {
         gender_col.setCellFactory(TextFieldTableCell.forTableColumn());
         address_col.setCellFactory(TextFieldTableCell.forTableColumn());
         number_col.setCellFactory(TextFieldTableCell.forTableColumn());
-        update.setVisible(true);
+
     }
     @FXML
     private void updateNameHandler(TableColumn.CellEditEvent event){
@@ -216,5 +216,6 @@ public class man_client_controller implements Initializable {
     private void handleSearchEvent(ActionEvent event){
         String data = search_field.getText();
         String get_data = "select * from Client where Cid="+data;
+
     }
 }

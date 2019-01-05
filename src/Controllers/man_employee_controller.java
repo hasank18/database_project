@@ -109,7 +109,7 @@ public class man_employee_controller implements Initializable {
         gender_col.setCellFactory(TextFieldTableCell.forTableColumn());
         address_col.setCellFactory(TextFieldTableCell.forTableColumn());
         number_col.setCellFactory(TextFieldTableCell.forTableColumn());
-        update.setVisible(true);
+
     }
     @FXML
     private void updateNameHandler(TableColumn.CellEditEvent event){

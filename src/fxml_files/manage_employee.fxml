@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane fx:id="container" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.man_employee_controller">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.man_employee_controller">
     <children>
         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -41,20 +41,17 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                     </BorderPane.margin>
                     <columns>
-                        <TableColumn fx:id="username_col"  prefWidth="75.0" text="User Name" />
-                        <TableColumn fx:id="pass_col" onEditCommit="#updatePasswordHandler" prefWidth="75.0" text="Password" />
-                        <TableColumn fx:id="name_col" onEditCommit="#updateNameHandler" prefWidth="75.0" text="name" />
-                        <TableColumn fx:id="date_col" onEditCommit="#updateDateHandler" prefWidth="75.0" text="birthdate" />
-                        <TableColumn fx:id="address_col" onEditCommit="#updateAddressHandler" prefWidth="75.0" text="address" />
-                        <TableColumn fx:id="number_col" onEditCommit="#updatePhoneHandler" prefWidth="112.0" text="Phone Number" />
-                        <TableColumn fx:id="gender_col" onEditCommit="#updateGenderHandler" prefWidth="75.0" text="gender" />
-                        <TableColumn fx:id="salary_col" onEditCommit="#updateSalaryHandler" prefWidth="75.0" text="salary" />
+                        <TableColumn fx:id="username_col" prefWidth="100.0" text="User Name" />
+                        <TableColumn fx:id="pass_col" onEditCommit="#updatePasswordHandler" prefWidth="100.0" text="Password" />
+                        <TableColumn fx:id="name_col" onEditCommit="#updateNameHandler" prefWidth="100.0" text="name" />
+                        <TableColumn fx:id="date_col" onEditCommit="#updateDateHandler" prefWidth="100.0" text="birthdate" />
+                        <TableColumn fx:id="address_col" onEditCommit="#updateAddressHandler" prefWidth="130.0" text="address" />
+                        <TableColumn fx:id="number_col" onEditCommit="#updatePhoneHandler" prefWidth="130.0" text="Phone Number" />
+                        <TableColumn fx:id="gender_col" onEditCommit="#updateGenderHandler" prefWidth="100.0" text="gender" />
+                        <TableColumn fx:id="salary_col" onEditCommit="#updateSalaryHandler" prefWidth="100.0" text="salary" />
                     </columns>
                 </TableView>
             </center>
-            <bottom>
-                <Button fx:id="update" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#update" text="Update" visible="false" BorderPane.alignment="CENTER" />
-            </bottom>
         </BorderPane>
     </children>
 </AnchorPane>

@@ -14,7 +14,7 @@
   <items>
       <VBox fx:id="main_pane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #00001f;">
          <children>
-            <HBox fx:id="lib_box" onMouseClicked="#handleLibraryAction">
+            <HBox fx:id="lib_box">
                <VBox.margin>
                   <Insets bottom="2.0" top="2.0" />
                </VBox.margin>

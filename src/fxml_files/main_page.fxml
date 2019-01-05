@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane cacheShape="false" centerShape="false" dividerPositions="0.3963210702341137" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPage2_Controller">
+<SplitPane cacheShape="false" centerShape="false" dividerPositions="0.45484949832775917" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPage2_Controller">
     <items>
         <VBox fx:id="main_pane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #00001f;">
             <children>
-                <HBox fx:id="lib_box" onMouseClicked="#handleLibraryAction">
+                <HBox fx:id="lib_box">
                     <VBox.margin>
                         <Insets bottom="2.0" top="2.0" />
                     </VBox.margin>
@@ -86,7 +86,7 @@
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin></ImageView>
-                        <Label maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="180.0" text="Manage Employee" textFill="WHITE">
+                        <Label maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="200.0" text="Manage Employee" textFill="WHITE">
                             <font>
                                 <Font name="Abyssinica SIL" size="24.0" />
                             </font>
