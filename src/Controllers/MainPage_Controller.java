@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainPage_Controller implements Initializable {
-    ObservableList<String> list = FXCollections.observableArrayList("Date","Category","Amount");
+    ObservableList<String> list = FXCollections.observableArrayList("Category","Amount");
     @FXML
     AnchorPane switch_pane;
     @FXML

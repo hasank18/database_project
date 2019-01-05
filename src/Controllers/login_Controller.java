@@ -65,12 +65,12 @@ public class login_Controller implements Initializable {
     @FXML
     private void eventHandler(ActionEvent event)  throws Exception {
         if (checkInfo() && login()) {
-                Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page2.fxml"));
-                Scene scene = new Scene(parent);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            }
+            Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page2.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
             if (name.getText().equals("admin") && pass.getText().equals("admin")) {
                 Parent parent = FXMLLoader.load(getClass().getResource("../fxml_files/main_page.fxml"));
                 Scene scene = new Scene(parent);
