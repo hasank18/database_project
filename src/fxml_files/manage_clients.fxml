@@ -37,8 +37,8 @@
                <bottom>
                   <AnchorPane prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutX="538.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSearchEvent" text="Search" AnchorPane.rightAnchor="0.0" />
-                        <TextField fx:id="search_field" layoutY="1.0" prefHeight="26.0" prefWidth="535.0" promptText="Search Client By ID" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" />
+                        <Button layoutX="538.0" layoutY="1.0" mnemonicParsing="false" text="Search" AnchorPane.rightAnchor="0.0" />
+                        <TextField fx:id="search_field" layoutY="1.0" onKeyReleased="#searchClient" prefHeight="26.0" prefWidth="535.0" promptText="Search Client By ID/name" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" />
                      </children>
                      <BorderPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />

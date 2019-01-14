@@ -17,11 +17,10 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class man_client_controller implements Initializable {
     String server="localhost";
@@ -31,6 +30,7 @@ public class man_client_controller implements Initializable {
     String database="mydb";
     String jdbcurl;
     Connection con=null;
+    private PreparedStatement pst=null;
     @FXML
     AnchorPane container;
     @FXML
@@ -213,9 +213,39 @@ public class man_client_controller implements Initializable {
         }
     }
     @FXML
-    private void handleSearchEvent(ActionEvent event){
-        String data = search_field.getText();
-        String get_data = "select * from Client where Cid="+data;
+    private void searchClient() {
+        if (search_field.getText().equals("")) {
+            table.getItems().clear();
+            try {
+                pst = con.prepareStatement("select *from Client");
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    table.getItems().add(new Client (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
+                }
+            } catch (SQLException e1) {
+                Logger.getLogger(man_client_controller.class.getName()).log(Level.SEVERE ,null,e1);
+            }
+        }
+        else {
+            table.getItems().clear();
+            String sql = "select * from Client where Cname like '"  + search_field.getText() + "%' union select *from Client where Cid like '"+search_field.getText() +"%'";
 
+            try {
+                pst = con.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    int cid = rs.getInt(1);
+                    String cname = rs.getString(2);
+                    String birth=rs.getString(6);
+                    String gender = rs.getString(3);
+                    String address = rs.getString(4);
+                    String num=rs.getString(5);
+                    table.getItems().add(new Client(cid,cname,birth,gender,address,num));
+                }
+            } catch (SQLException e1) {
+                Logger.getLogger(man_client_controller.class.getName()).log(Level.SEVERE, null, e1);
+            }
+
+        }
     }
 }

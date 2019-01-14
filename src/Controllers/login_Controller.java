@@ -11,13 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.DBconnection;
 import sun.security.util.Password;
 
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.*;
 import java.awt.*;
@@ -81,6 +81,13 @@ public class login_Controller implements Initializable {
 
         }
 
+
+//    private void enterpass(java.awt.event.KeyEvent evt)  throws Exception {
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            login();
+//        }
+//
+//    }
 
     private boolean login () {
         String UserName = name.getText();
