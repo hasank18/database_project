@@ -1,6 +1,6 @@
 package Controllers;
 
-import com.mysql.cj.protocol.ResultsetRow;
+
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,18 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.DBconnection;
-import sun.security.util.Password;
-
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.*;
 import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 

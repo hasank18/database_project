@@ -135,70 +135,7 @@ public class man_book_controller implements Initializable {
         container2.setMargin(choiceBox,new Insets(0,0,0,8));
 
     }
-//    @FXML
-//    private void handleSearchEvent(ActionEvent event){
-//        TableColumn<Books,String> col1= new TableColumn<>("ID");
-//        TableColumn<Books,String> col2= new TableColumn<>("Name");
-//        TableColumn<Books,String> col3= new TableColumn<>("Amount");
-//        TableColumn<Books,String> col4= new TableColumn<>("Author");
-//        TableColumn<Books,String> col5= new TableColumn<>("Category");
-//        String auth = "";
-//        String cat = "";
-//        String id="";
-//        String name="";
-//        String amount="";
-//        col1.setCellValueFactory(data -> {
-//            Books value = data.getValue();
-//            return new ReadOnlyStringWrapper(value.getId());
-//        });
-//        col2.setCellValueFactory(data -> {
-//            Books value = data.getValue();
-//            return new ReadOnlyStringWrapper(value.getName());
-//        });
-//        col3.setCellValueFactory(data -> {
-//            Books value = data.getValue();
-//            return new ReadOnlyStringWrapper(value.getAmout());
-//        });
-//        col4.setCellValueFactory(data -> {
-//            Books value = data.getValue();
-//            return new ReadOnlyStringWrapper(value.getAuth());
-//        });
-//        col5.setCellValueFactory(data -> {
-//            Books value = data.getValue();
-//            return new ReadOnlyStringWrapper(value.getCat());
-//        });
-//        table.getColumns().removeAll(table.getColumns());
-//        table.getColumns().addAll(col1,col2,col3,col4,col5);
-//
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
-//            Statement stmt=con.createStatement();
-//            String test = "select *from Books where BookName='"+book_name_field.getText()+"'";
-//            ResultSet rs2 = stmt.executeQuery(test);
-//            rs2.next();
-//            id = ""+rs2.getInt(1);
-//            name = rs2.getString(2);
-//            amount = ""+rs2.getInt(3);
-//            String author = rs2.getString(4);
-//            String categ = rs2.getString(5);
-//            String get_auth= "select AuthorName from Author where AuthorName="+author;
-//            String get_cat = "select CategoryName from Category where CategoryName="+categ;
-//            rs2 = stmt.executeQuery(get_auth);
-//            rs2.next();
-//            auth = rs2.getString(1);
-//            rs2 = stmt.executeQuery(get_cat);
-//            rs2.next();
-//            cat = rs2.getString(1);
-//        }catch (Exception e) {
-//            not_found.setText("Book Not Found");
-//            not_found.setTextFill(Color.web("red"));
-//
-//        }
-//
-//        table.getItems().add(new Books(id,name,amount,auth,cat));
-//        //added nothing
-//    }
+
 
     @FXML
     private void searchbook() {
@@ -478,30 +415,30 @@ public class man_book_controller implements Initializable {
             e.printStackTrace();
         }
     }
-//    @FXML
-//    private void update(ActionEvent event){
-//        String bookid,bookname,amount,author,category;
-//        table.getItems().removeAll(table.getItems());
-//        try{
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
-//            Statement stmt=con.createStatement();
-//            String get_data = "select *from Books";
-//            ResultSet rs = stmt.executeQuery(get_data);
-//            while(rs.next()){
-//                bookid = rs.getString(1);
-//                bookname = rs.getString(2);
-//                amount = rs.getString(3);
-//                category = rs.getString(4);
-//                author = rs.getString(5);
-//
-//                table.getItems().add(new Books(bookid,bookname,amount,category,author));
-//            }
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
-//
+    @FXML
+    private void update(ActionEvent event){
+        String bookid,bookname,amount,author,category;
+        table.getItems().removeAll(table.getItems());
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
+            Statement stmt=con.createStatement();
+            String get_data = "select *from Books";
+            ResultSet rs = stmt.executeQuery(get_data);
+            while(rs.next()){
+                bookid = rs.getString(1);
+                bookname = rs.getString(2);
+                amount = rs.getString(3);
+                category = rs.getString(4);
+                author = rs.getString(5);
+
+                table.getItems().add(new Books(bookid,bookname,amount,category,author));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.man_employee_controller">
     <children>
@@ -17,6 +18,9 @@
                             <BorderPane.margin>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                             </BorderPane.margin>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
                         </Button>
                     </left>
                     <center>
@@ -24,6 +28,9 @@
                             <BorderPane.margin>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                             </BorderPane.margin>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
                         </Button>
                     </center>
                     <right>
@@ -31,6 +38,9 @@
                             <BorderPane.margin>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                             </BorderPane.margin>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
                         </Button>
                     </right>
                 </BorderPane>

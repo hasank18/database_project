@@ -1,13 +1,10 @@
 
 package Controllers;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
-import sun.security.util.Password;
-
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;

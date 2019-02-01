@@ -18,14 +18,17 @@
          <children>
             <Label text="Enter Your User Name">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="Id_field" />
-            <Label fx:id="no_id" />
+            <Label fx:id="no_id">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font></Label>
             <Label text="Enter Client ID">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="17.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -34,10 +37,13 @@
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
-            <Label fx:id="no_cid" />
+            <Label fx:id="no_cid">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font></Label>
             <Label text="Enter Book ID">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="17.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -46,10 +52,13 @@
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
-            <Label fx:id="no_bid" />
+            <Label fx:id="no_bid">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font></Label>
             <Label text="Enter The Date">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="17.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -62,14 +71,14 @@
                      </GridPane.margin></DatePicker>
                   <Label text="Start Date" GridPane.columnIndex="0" GridPane.rowIndex="0">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Arial Bold" size="17.0" />
                      </font>
                      <GridPane.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </GridPane.margin></Label>
                   <Label text="End Date" GridPane.columnIndex="1" GridPane.rowIndex="0">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Arial Bold" size="17.0" />
                      </font></Label>
                   <DatePicker fx:id="edate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
@@ -82,11 +91,20 @@
                   <RowConstraints />
                </rowConstraints>
             </GridPane>
-            <Label fx:id="no_date" />
+            <Label fx:id="no_date">
+               <font>
+                  <Font name="Arial Bold" size="17.0" />
+               </font></Label>
             <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="218.0" prefWidth="1018.0">
                <children>
-                  <Button layoutX="538.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <Button layoutX="14.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleSubmitEvent" prefHeight="25.0" prefWidth="165.0" text="Submit" />
+                  <Button layoutX="538.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Button layoutX="14.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleSubmitEvent" prefHeight="25.0" prefWidth="165.0" text="Submit">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
                   <Button fx:id="recipient" layoutX="478.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleRecipientEvent" text="Go To Recipient" visible="false" />
                </children>
             </AnchorPane>

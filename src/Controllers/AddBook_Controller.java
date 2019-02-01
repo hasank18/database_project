@@ -46,21 +46,21 @@ public class AddBook_Controller implements Initializable {
         else
             no_name.setText("");
         if(amount_field.getText().isEmpty()){
-            no_amount.setText("Please enter your email");
+            no_amount.setText("Please enter book amount");
             no_amount.setTextFill(Color.web("red"));
             flag=false;
         }
         else
             no_amount.setText("");
         if(category_field.getText().isEmpty()){
-            no_category.setText("Please enter your phone");
+            no_category.setText("Please enter the author");
             no_category.setTextFill(Color.web("red"));
             flag=false;
         }
         else
             no_category.setText("");
         if(author_field.getText().isEmpty()){
-            no_author.setText("Please enter date");
+            no_author.setText("Please enter the category");
             no_author.setTextFill(Color.web("red"));
             flag=false;
         }

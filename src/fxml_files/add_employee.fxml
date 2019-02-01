@@ -20,35 +20,41 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
             <TextField fx:id="UserName_field" promptText="UserName Here">
                <VBox.margin>
 
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
-            <Label fx:id="no_UserName" />
+            <Label fx:id="no_UserName">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
 
             <Label text="Enter Your Password">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
 
             <PasswordField fx:id="Password_field" promptText="Password Here">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></PasswordField>
-            <Label fx:id="no_Password" />
+            <Label fx:id="no_Password">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
 
             <Label text="Enter Your Name">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
             <TextField fx:id="name_field" promptText="Name Here">
                <VBox.margin>
@@ -57,22 +63,28 @@
                </VBox.margin></TextField>
 
 
-            <Label fx:id="no_name" />
+            <Label fx:id="no_name">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
             <Label text="Enter Birthdate">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
             <DatePicker fx:id="date_field">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></DatePicker>
-            <Label fx:id="no_birthdate" />
+            <Label fx:id="no_birthdate">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
             <Label text="Enter Phone Number">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
@@ -83,31 +95,40 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <Label fx:id="no_phone" />
+            <Label fx:id="no_phone">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
             <Label text="Enter Your Address">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
             <TextField fx:id="Address_field">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></TextField>
-            <Label fx:id="no_Address" />
+            <Label fx:id="no_Address">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
             <Label text="Choose Gender">
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="19.0" />
                </font></Label>
             <ChoiceBox fx:id="choiceBox" prefWidth="150.0">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin></ChoiceBox>
-            <Label fx:id="no_gender" />
+            <Label fx:id="no_gender">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
             <AnchorPane prefHeight="315.0" prefWidth="1018.0">
                <children>
                   <Button layoutX="853.0" layoutY="283.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" text="Cancel" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
