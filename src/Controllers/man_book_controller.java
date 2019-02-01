@@ -54,6 +54,7 @@ public class man_book_controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
        FillChoiceBox();
 
         String bookname, bookid, amount, auth, cat;
