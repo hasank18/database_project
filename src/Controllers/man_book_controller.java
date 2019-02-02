@@ -84,7 +84,7 @@ public class man_book_controller implements Initializable {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "hanin", "h@n!nabbas123" + "");
             Statement stmt = con.createStatement();
-            String get_data = "select *from Books";
+            String get_data = "select *from Books ORDER BY BookName";
             ResultSet rs = stmt.executeQuery(get_data);
             while (rs.next()) {
                 bookid = rs.getString(1);

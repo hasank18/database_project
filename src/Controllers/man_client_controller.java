@@ -75,7 +75,7 @@ public class man_client_controller implements Initializable {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
-            String get_data = "select *from Client";
+            String get_data = "select *from Client ORDER BY Cname ";
             ResultSet rs = stmt.executeQuery(get_data);
             while(rs.next()){
                 cid = rs.getInt(1);
