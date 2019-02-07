@@ -137,6 +137,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 create trigger TDB_BOOKS before delete
 on Books for each row
+delete from Borrows where Borrows.Book_id=Book_id;
 begin
 end;
 

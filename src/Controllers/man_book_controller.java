@@ -254,8 +254,7 @@ public class man_book_controller implements Initializable {
                 table.getItems().add(new Books(id.get(i), name.get(i), amount.get(i), auth.get(i), cat.get(i)));
             }
         }catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // TODO Auto-generated catch block            e.printStackTrace();
         }
     }
 
@@ -405,13 +404,13 @@ public class man_book_controller implements Initializable {
     @FXML
     private void deleteBook(ActionEvent event){
         String id = table.getSelectionModel().getSelectedItem().getId();
-        String delete_Book = "call delbook('"+id+ "')";
+//        String delete_Book = "call delbook('"+id+ "')";
         table.getItems().remove(table.getSelectionModel().getSelectedItem());
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement();
-            stmt.executeQuery(delete_Book);
+            stmt.executeQuery("delete from books where books.Book_id"+id+"");
         }catch (Exception e){
             e.printStackTrace();
         }
