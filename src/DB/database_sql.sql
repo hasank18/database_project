@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Books` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Books_Author_idx` ON `mydb`.`Books` (`Author_Author_id` ASC) VISIBLE;
+CREATE INDEX `fk_Books_Author_idx` ON `mydb`.`Books` (`Author_Author_id` ASC) ;
 
-CREATE INDEX `fk_Books_Category1_idx` ON `mydb`.`Books` (`Category_Category_id1` ASC) VISIBLE;
+CREATE INDEX `fk_Books_Category1_idx` ON `mydb`.`Books` (`Category_Category_id1` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (
   PRIMARY KEY (`UserName`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `UserName_UNIQUE` ON `mydb`.`Employee` (`UserName` ASC) VISIBLE;
+CREATE UNIQUE INDEX `UserName_UNIQUE` ON `mydb`.`Employee` (`UserName` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -123,43 +123,44 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Borrows` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Borrows_Client1_idx` ON `mydb`.`Borrows` (`Client_Cid` ASC) VISIBLE;
+CREATE INDEX `fk_Borrows_Client1_idx` ON `mydb`.`Borrows` (`Client_Cid` ASC) ;
 
-CREATE INDEX `fk_Borrows_Books1_idx` ON `mydb`.`Borrows` (`Books_Book_id` ASC) VISIBLE;
+CREATE INDEX `fk_Borrows_Books1_idx` ON `mydb`.`Borrows` (`Books_Book_id` ASC) ;
 
-CREATE INDEX `fk_Borrows_Employee1_idx` ON `mydb`.`Borrows` (`Employee_UserName` ASC) VISIBLE;
+CREATE INDEX `fk_Borrows_Employee1_idx` ON `mydb`.`Borrows` (`Employee_UserName` ASC) ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+-- ------------------------------------------------------------------------------------
+-- Triggers
+-- ------------------------------------------------------------------------------------
 
+DELIMITER $$
 create trigger TDB_BOOKS before delete
 on Books for each row
 begin
-delete from borrows where borrows.Books_Book_id=books.Book_id;
+delete from borrows where borrows.Books_Book_id=old.Book_id;
 end $$
-DELEMETER $$
+DELIMITER ;
 
-
-create trigger TUB_BOOKS before update
-on Books for each row
+DELIMITER $$
+create trigger TDB_AUTHOR before delete
+on Author for each row
 begin
-end;
+delete from Books where Books.Author_Author_id=old.Author_id;
+end $$
+DELIMITER ;
 
-
-create trigger TIB_BORROWS before insert
-on Borrows for each row
+DELIMITER $$
+create trigger TDB_CATEGORY before delete
+on Category for each row
 begin
-end;
-
-
-create trigger TUB_BORROWS before update
-on Borrows for each row
-begin
-end;
-
+delete from Books where Books.Category_Category_id1=old.Category_id;
+end $$
+DELIMITER ;
 
 
 -- -----------------------------------------------------------
@@ -400,9 +401,8 @@ delete from Borrows where Borrows.Employee_UserName=username;
 delete from Employee where Employee.UserName=username;
 end $$
 DELIMITER ;
-call deleteEmployee(
-drop procedure deleteEmployee;
-//////////////////////////////////////////////////
+
+
 DELIMITER $$
 CREATE PROCEDURE updateBookName
 (in Book_id int,
@@ -414,9 +414,7 @@ BookName=BookName
 where Books.Book_id=Book_id;
 end $$
 DELIMITER ;
-drop procedure updateBookName;
-call updateBookName(5,"essays");
-select * from Books;
+
 DELIMITER $$
 CREATE PROCEDURE updatebookamount
 (in bookid int,
@@ -428,8 +426,6 @@ Amount=amount
 where Books.Book_id=bookid;
 end $$
 DELIMITER ;
-drop procedure updatebookamount;
-call  updatebookamount(5,3);
 
 DELIMITER $$
 CREATE PROCEDURE updatebookauthor
@@ -442,8 +438,6 @@ Author_Author_id=author
 where Books.Book_id=bookid;
 end $$
 DELIMITER ;
-drop procedure updatebookauthor;
-call updatebookauthor(5,2);
 
 DELIMITER $$
 CREATE PROCEDURE updatebookcategory
@@ -456,8 +450,6 @@ Category_Category_id1=category
 where Books.Book_id=bookid;
 end $$
 DELIMITER ;
-drop procedure updatebookcategory;
-call updatebookcategory(5,3);
 
 DELIMITER $$
 create procedure deletebk(in Book_id INT)
@@ -466,9 +458,6 @@ delete from Borrows where Borrows.Books_Book_id=Book_id;
 delete from Books where Books.Book_id=Book_id;
 end $$
 DELIMITER ;
-drop procedure deletebk;
-call deletebk(1);
-select * from Books;
 
 
 
