@@ -3,6 +3,7 @@ package Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -15,19 +16,27 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class AddBook_Controller implements Initializable {
-    String server="localhost";
-    int port=3306;
-    String user="hanin";
-    String password="h@n!nabbas123";
-    String database="mydb";
-    String jdbcurl;
     Connection con=null;
     @FXML
     Label no_name,no_amount,no_category,no_author;
     @FXML
-    TextField name_field,amount_field,category_field,author_field;
+    TextField name_field,amount_field,author_field;
+    @FXML
+    ChoiceBox<String> category;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
+            Statement stmt=con.createStatement();
+            ResultSet rs2 = stmt.executeQuery("select CategoryName from Category");
+            while(rs2.next())
+                category.getItems().add(rs2.getString(1));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
 
     }
     @FXML
@@ -52,7 +61,7 @@ public class AddBook_Controller implements Initializable {
         }
         else
             no_amount.setText("");
-        if(category_field.getText().isEmpty()){
+        if(category.getValue()==null){
             no_category.setText("Please enter the author");
             no_category.setTextFill(Color.web("red"));
             flag=false;
@@ -66,7 +75,7 @@ public class AddBook_Controller implements Initializable {
         }
         else
             no_author.setText("");
-        if(!name_field.getText().isEmpty()&&!author_field.getText().isEmpty()&&!category_field.getText().isEmpty()&&!amount_field.getText().isEmpty())
+        if(!name_field.getText().isEmpty()&&!author_field.getText().isEmpty()&&category.getValue()!=null&&!amount_field.getText().isEmpty())
             flag = true;
         return flag;
     }
@@ -74,7 +83,7 @@ public class AddBook_Controller implements Initializable {
         int amount=Integer.parseInt(amount_field.getText()),auth_id=-1,cat_id=-1;
         String book_name=name_field.getText();
         String get_auth_id="select Author_id from Author where AuthorName='"+author_field.getText()+"'";
-        String get_cat_id="select Category_id from Category where CategoryName='"+category_field.getText()+"'";
+        String get_cat_id="select Category_id from Category where CategoryName='"+category.getValue()+"'";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
