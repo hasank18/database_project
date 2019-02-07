@@ -22,12 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class man_book_controller implements Initializable {
-    String server = "localhost";
-    int port = 3306;
-    String user = "hanin";
-    String password = "h@n!nabbas123";
-    String database = "mydb";
-    String jdbcurl;
     Connection con = null;
     private Label label = new Label();
     private TextField textField = new TextField();

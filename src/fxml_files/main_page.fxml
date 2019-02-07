@@ -48,7 +48,7 @@
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin></ImageView>
-                        <Label maxWidth="1.7976931348623157E308" text="Borrow a book" textFill="WHITE">
+                        <Label maxWidth="1.7976931348623157E308" text="Manage Borrowed Books" textFill="WHITE">
                             <font>
                                 <Font name="Abyssinica SIL" size="24.0" />
                             </font>

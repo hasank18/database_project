@@ -1,15 +1,26 @@
 package DB;
 
 public class Borrow {
-    private String employee_user_name, sdate, tdate;
+    private String borrowID,employee_user_name, sdate, tdate,bname,cname;
     private String cid, bid;
 
-    public Borrow(String employee_user_name, String sdate, String tdate, String  cid, String bid) {
+    public Borrow(String borrowID, String employee_user_name, String sdate, String tdate, String bid, String bname, String cid, String cname) {
+        this.borrowID = borrowID;
         this.employee_user_name = employee_user_name;
         this.sdate = sdate;
         this.tdate = tdate;
+        this.bname = bname;
+        this.cname = cname;
         this.cid = cid;
         this.bid = bid;
+    }
+
+    public String getBorrowID() {
+        return borrowID;
+    }
+
+    public void setBorrowID(String borrowID) {
+        this.borrowID = borrowID;
     }
 
     public String getEmployee_user_name() {
@@ -34,6 +45,22 @@ public class Borrow {
 
     public void setTdate(String tdate) {
         this.tdate = tdate;
+    }
+
+    public String getBname() {
+        return bname;
+    }
+
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     public String getCid() {

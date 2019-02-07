@@ -459,6 +459,56 @@ delete from Books where Books.Book_id=Book_id;
 end $$
 DELIMITER ;
 
+DELIMITER $$
+create procedure updateBorrowUsrename(in id int,in username varchar(45))
+begin
+update Borrows
+set Employee_UserName = username
+where
+Borrow_id = id;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure updateBorrowSdate(in id int,in sdate varchar(45))
+begin
+update Borrows
+set FromDate = sdate
+where
+Borrow_id = id;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure updateBorrowTdate(in id int,in tdate varchar(45))
+begin
+update Borrows
+set ToDate = tdate
+where
+Borrow_id = id;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure updateBorrowCid(in id int,in Cid int)
+begin
+update Borrows
+set Client_Cid = Cid
+where
+Borrow_id = id;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure updateBorrowBid(in id int,in Bid int)
+begin
+update Borrows
+set Books_Book_id = Bid
+where
+Borrow_id = id;
+end $$
+DELIMITER ;
+select * from Borrows;
 
 
 -- ----------------------------------------------------

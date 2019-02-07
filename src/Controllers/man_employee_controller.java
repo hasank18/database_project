@@ -20,12 +20,6 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class man_employee_controller implements Initializable {
-    String server="localhost";
-    int port=3306;
-    String user="hanin";
-    String password="h@n!nabbas123";
-    String database="mydb";
-    String jdbcurl;
     Connection con=null;
     @FXML
     AnchorPane container;
@@ -241,4 +235,5 @@ public class man_employee_controller implements Initializable {
             e.printStackTrace();
         }
     }
+
 }
