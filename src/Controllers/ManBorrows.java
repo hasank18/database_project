@@ -97,12 +97,12 @@ public class ManBorrows implements Initializable {
     @FXML
     private void updateRow(TableColumn.CellEditEvent<Borrow, String> event){
         String borrowId,username,sdate,tdate,bid,bname,cid,cname;
-        Borrow borrow = table.getSelectionModel().getSelectedItem();
+        table.getItems().removeAll(table.getItems());
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","hanin","h@n!nabbas123" + "" );
             Statement stmt=con.createStatement(),stmt2=con.createStatement(),stmt3=con.createStatement();
-            String get_data = "select *from Borrows where Borrow_id="+borrow.getBorrowID();
+            String get_data = "select *from Borrows";
             ResultSet rs = stmt.executeQuery(get_data),rs2,rs3;
             while(rs.next()){
                 borrowId = rs.getString(1);
@@ -117,7 +117,7 @@ public class ManBorrows implements Initializable {
                 rs3 = stmt3.executeQuery("select Cname from Client where Cid="+cid);
                 rs3.next();
                 cname = rs3.getString(1);
-                table.getSelectionModel().getSelectedItems().set(0,new Borrow(borrowId,username,sdate,tdate,bid,bname,cid,cname));
+                table.getItems().add(new Borrow(borrowId,username,sdate,tdate,bid,bname,cid,cname));
             }
 
         }catch (Exception e){
