@@ -84,7 +84,7 @@ public class AddBook_Controller implements Initializable {
             auth_id=rs2.getInt(1);
             ResultSet rs3 = stmt.executeQuery(get_cat_id);
             rs3.next();
-            cat_id=rs3.getInt(2);
+            cat_id=rs3.getInt(1);
             String test ="call addBook('"+book_name+"'"+","+amount+","+auth_id+","+cat_id+")";
             ResultSet rs=stmt.executeQuery(test);
         } catch (Exception e) {
