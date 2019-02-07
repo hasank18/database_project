@@ -137,9 +137,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 create trigger TDB_BOOKS before delete
 on Books for each row
-delete from Borrows where Borrows.Book_id=Book_id;
 begin
-end;
+delete from borrows where borrows.Books_Book_id=books.Book_id;
+end $$
+DELEMETER $$
 
 
 create trigger TUB_BOOKS before update
@@ -166,7 +167,7 @@ end;
 -- -----------------------------------------------------------
 
 -- -----------------------------------------------------------
--- Adding Procedures
+-- Procedures
 -- -----------------------------------------------------------
 DELIMITER $$
  create procedure addAuthor (in AName varchar(45))
@@ -194,7 +195,7 @@ insert into Books(BookName,Amount,Author_Author_id,Category_Category_id1)
 values(BookName,Amount,Author_Author_id,Category_Category_id1);
 end $$
 DELIMITER ;
-
+drop procedure addBook;
 DELIMITER $$
 CREATE PROCEDURE addclient
 (in  Cname varchar(45),in BirthDate varchar(45) ,in  Gender varchar(45),in Address varchar(45),in PhoneNum varchar(45))
@@ -206,10 +207,10 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE addemployee
-(in UserName varchar(15),in Password varchar(45),in Ename varchar(45),in BirthDate varchar(45) ,in  Gender varchar(45),in Address varchar(45),in PhoneNum varchar(45),in Salary varchar(45))
+(in UserName varchar(15),in Password varchar(45),in Ename varchar(45),in BirthDate varchar(45) ,in  Gender varchar(45),in Address varchar(45),in PhoneNum varchar(45),in Salary varchar(45),in eBirthDate varchar(45))
 begin
-insert into Employee(UserName,Password,Ename,BirthDate,Gender,Address,PhoneNum,Salary)
-values(UserName,Password,Ename,BirthDate,Gender,Address,PhoneNum,Salary);
+insert into Employee(UserName,Password,Ename,Gender,Address,PhoneNum,Salary,eBirthDate)
+values(UserName,Password,Ename,Gender,Address,PhoneNum,Salary,eBirthDate);
 end $$
 DELIMITER ;
 
@@ -299,9 +300,12 @@ DELIMITER ;
 DELIMITER $$
 create procedure deleteCLient(in CID int)
 begin
+delete from Borrows where Borrows.Client_Cid=CID;
 delete from Client where Client.Cid=CID;
 end $$
 DELIMITER ;
+drop procedure deleteCLient;
+call deleteCLient(1);
 
 DELIMITER $$
 CREATE PROCEDURE updatePhoneEmployee
@@ -392,11 +396,12 @@ DELIMITER ;
 DELIMITER $$
 create procedure deleteEmployee(in username varchar(45))
 begin
+delete from Borrows where Borrows.Employee_UserName=username;
 delete from Employee where Employee.UserName=username;
 end $$
 DELIMITER ;
-
-
+call deleteEmployee(
+drop procedure deleteEmployee;
 //////////////////////////////////////////////////
 DELIMITER $$
 CREATE PROCEDURE updateBookName
@@ -455,16 +460,14 @@ drop procedure updatebookcategory;
 call updatebookcategory(5,3);
 
 DELIMITER $$
-create procedure deletebk(in Book_id INT,in Author_id INT, in Category_id INT)
+create procedure deletebk(in Book_id INT)
 begin
+delete from Borrows where Borrows.Books_Book_id=Book_id;
 delete from Books where Books.Book_id=Book_id;
-delete from Books where Books.Category_Category_id1=Category_id;
-delete from Books where Books.Author_Author_id=Author_id;
-
 end $$
 DELIMITER ;
 drop procedure deletebk;
-call deletebk(1,2,6);
+call deletebk(1);
 select * from Books;
 
 
@@ -479,9 +482,9 @@ select * from Books;
 
 
 
-call addemployee("nono","1234567","nour","1997-8-9","female","beirut","03-121314","600$");
-call addemployee("koko","1234567","kamal","1970-6-7","male","beirut","71-159753","600$");
-call addemployee("momo","1234567","mohamad","1997-8-9","male","beirut","03-445455","600$");
+call addemployee("nono","1234567","nour","female","beirut","03-121314","600$","1997-8-9");
+call addemployee("koko","1234567","kamal","male","beirut","71-159753","600$","1970-6-7");
+call addemployee("momo","1234567","mohamad","male","beirut","03-445455","600$","1997-8-9");
 
   call addAuthor("hanin");
   call addAuthor("ali");
@@ -536,10 +539,9 @@ call addclient("hussein","1980-11-12","male","beirut","78-112233");
  select *from Borrows;
  select *from Author;
  select *from Category;
-
-
+ use mydb;
  -- Altered table Employee
- ALTER TABLE Employee drop Employee.BirthDate;
+ ALTER TABLE Employee drop BirthDate;
  ALTER TABLE Employee add eBirthDate varchar(45);
  -- end ALter
  -- create view for recepient
@@ -549,3 +551,144 @@ call addclient("hussein","1980-11-12","male","beirut","78-112233");
  INNER JOIN Client on Client.Cid=Borrows.Client_Cid
  INNER JOIN Books on Books.Book_id=Books_Book_id;
 
+
+
+select user from mysql.db where db='mydb';
+
+
+CREATE USER 'hanin'@'localhost' IDENTIFIED BY 'h@n!nabbas123';
+GRANT ALL PRIVILEGES ON mydb.*  TO 'hanin'@'localhost';
+flush PRIVILEGES;
+GRANT ALL PRIVILEGES ON project_gui.* TO 'hanin'@'localhost';
+SHOW DATABASES LIKE 'mydb';
+SHOW GRANTS FOR 'hanin'@'localhost';
+
+declare cursor Client1  for
+select Cid,Cname
+from Client
+declare @cid INt, @cname varchar(45), @BN varchar(45), @AN varchar(45),@CN varchar(45),@EN varchar(45),@cnumber=0 INT
+open Client
+fetch next from Client1 into  @cid  @cname
+while (@@fetch_status =0)
+declare Bookinfo cursor as
+select * from recepient
+where Cid=@cid
+orderd by Book_id,Cid,Borrow_id,UserName
+print "Client name:"+@cname char(10) "Client id:"+@cid
+set cnumber+=1
+print "recepient number:" +cnumber
+print"................................."
+print "BookName AuthorName CategoryName EmployeeName"
+open Bookinfo
+fetch next from Bookinfo into @BN,@AN, @CN,@EN
+while (@@fetch_status=0)
+print @BN,@AN,@CN,@EN
+fetch next from Bookinfo
+close Bookinfo
+fetch next from Client1
+deallocate Client1
+////////////////////////////////
+declare cid INt, ename varchar(45), bid varchar(45), PhoneNum varchar(45),BN varchar(45),fromdate varchar(45),todate varchar(45),addres varchar(45),cnumber=0 INT
+declare  client1 cursor
+for select * from recepient
+open client1
+fetch next from from client1 into  @cid, @BN,@cnumber,@bid,@PhoneNum,@fromdate,@todate,@addres,@ename,@cname
+while(@@fetch_status=0)
+begin
+print "ClientId:" +@cid
+print "Bookname:" +@BN
+set cnumber+=1
+print "invoice nb:" +@cnumber
+fetch next from cursor client1 into @cid, @BN,@cnumber
+end
+close client1
+deallocate client1
+/////////////////////////////////////////////
+DELIMITER $$
+CREATE PROCEDURE curdemo()
+BEGIN
+  DECLARE done INT DEFAULT FALSE;
+	declare cid int;
+    declare cname varchar(45);
+    declare client1 cursor for select Cid,Cname data from Client;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN client1;
+
+  read_loop: LOOP
+    FETCH client1 INTO cid, cname;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+  END LOOP;
+  CLOSE client1;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE print()
+BEGIN
+  DECLARE done INT DEFAULT FALSE;
+DECLARE _output TEXT DEFAULT '';
+DECLARE _ID INT DEFAULT 0;
+DECLARE cur1 CURSOR FOR SELECT Cid FROM Client;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = true;
+OPEN cur1;
+REPEAT
+  FETCH cur1 INTO _ID;
+  IF NOT done THEN
+    SET _output =  CONCAT(_output ,char(10), _ID);
+
+  END IF;
+UNTIL done END REPEAT;
+CLOSE cur1;
+
+SELECT _output;
+End $$
+DELIMITER ;
+
+drop procedure print;
+ call print;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE build_book_name (INOUT Books_name varchar(45))
+BEGIN
+
+ DECLARE v_finished INTEGER DEFAULT 0;
+        DECLARE v_book varchar(45) DEFAULT "";
+
+ -- declare cursor for employee email
+ DEClARE book_cursor CURSOR FOR
+ SELECT BookName FROM Books;
+
+ -- declare NOT FOUND handler
+ DECLARE CONTINUE HANDLER
+        FOR NOT FOUND SET v_finished = 1;
+
+ OPEN book_cursor;
+
+ get_book: LOOP
+
+ FETCH book_cursor INTO v_book;
+
+ IF v_finished = 1 THEN
+ LEAVE get_book;
+ END IF;
+
+ -- build email list
+ SET Books_name = CONCAT(v_book,";",Books_name);
+
+ END LOOP get_book;
+
+ CLOSE book_cursor;
+
+END$$
+
+DELIMITER ;
+drop procedure build_book_name;
+
+SET @Books_name = "";
+CALL build_book_name("nerd");
+SELECT @Books_name;
